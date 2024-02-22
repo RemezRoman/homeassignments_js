@@ -14,8 +14,8 @@
     </p>
     <script>
       "use strict";
-      let price = parseInt(prompt("Введіть вартість товару", "0"));
-      let value = parseInt(prompt("Введіть кількість товару", "0"));
+      let price = parseFloat(prompt("Введіть вартість товару", "0"));
+      let value = parseFloat(prompt("Введіть кількість товару", "0"));
       const vat = 0.05;
       let totalPrice = price * value;
       let vatValue = price * value * vat;
