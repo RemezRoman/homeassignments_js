@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 0</title>
+  </head>
+  <body>
+    <h1>Задача 0</h1>
+    <p>Обчислити значення виразів:</p>
+    <ol>
+      <li>S1 = a+12+b</li>
+      <li>S2 = sqrt((a+b)/2a)</li>
+      <li>S3 = cbrt((a+b)*c)</li>
+      <li>S4 = sin(a/(-b))</li>
+    </ol>
+    <script>
+      "use strict";
+      let numA = parseInt(prompt("Введіть а", "0"));
+      let numB = parseInt(prompt("Введіть b", "0"));
+      let numС = parseInt(prompt("Введіть с", "0"));
+      let res1 = numA + 12 + numB;
+      let res2 = Math.sqrt(((numA + numB) / 2) * numA);
+      let res3 = Math.cbrt((numA + numB) * numС);
+      let res4 = Math.sin(numA / -numB);
+      document.write(
+        `1. S1 = ${res1} <br> 2. S2 = ${res2} <br> 3. S3 = ${res3} <br> 4. S4 = ${res4}`
+      );
+    </script>
+  </body>
+</html>
