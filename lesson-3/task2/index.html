@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не
+      вистачає то відмовляємо у покупці, інакше, якщо ще залишаються гроші, то
+      пропонуємо купити лотерею за 4 грн.
+    </p>
+    <script>
+      "use strict";
+      let goodsPrice = parseFloat(prompt("Введіть ціну товару", ""));
+      let amountOfMoney = parseFloat(
+        prompt("Введіть скільки у Вас грошей", "")
+      );
+      if (amountOfMoney < goodsPrice) alert("Вам відмовлено у покупці.");
+      else if (amountOfMoney - goodsPrice >= 4)
+        alert(
+          "Ваша покупка успішна, пропонуємо Вам ще купити лотерею за 4 грн."
+        );
+      else alert("Покупка успішна!");
+    </script>
+  </body>
+</html>

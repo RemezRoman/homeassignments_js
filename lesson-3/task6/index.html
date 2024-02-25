@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>З клавіатури вводиться номер дня тижня. Вивести на екран назву дня.</p>
+    <script>
+      "use strict";
+      let dayNumber = parseInt(prompt("Введіть номер дня тижня", ""));
+      if (dayNumber === 7) alert("Сьогодні неділя");
+      else if (dayNumber === 6) alert("Сьогодні субота");
+      else if (dayNumber === 5) alert("Сьогодні п'ятниця");
+      else if (dayNumber === 4) alert("Сьогодні четвер");
+      else if (dayNumber === 3) alert("Сьогодні середа");
+      else if (dayNumber === 2) alert("Сьогодні вівторок");
+      else if (dayNumber === 1) alert("Сьогодні понеділок");
+      else alert("Ви ввели щось дивне");
+    </script>
+  </body>
+</html>

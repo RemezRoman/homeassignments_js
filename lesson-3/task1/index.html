@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      З клавіатури вводяться імена двох дітей та кількість у них цукерок.
+      Вивести не екран ім’я тієї дитини, у якої кількість цукерок є більшою, або
+      вивести, що кількість однакова.
+    </p>
+    <script>
+      "use strict";
+      let nameFirstChild = prompt("Введідь ім'я першої дитини", "");
+      let nameSecondChild = prompt("Введідь ім'я другої дитини", "");
+      let firstChildCandies = parseInt(
+        prompt(`Введіть кількість цукерок у ${nameFirstChild}`)
+      );
+      let secondChildCandies = parseInt(
+        prompt(`Введіть кількість цукерок у ${nameSecondChild}`)
+      );
+      if (firstChildCandies > secondChildCandies)
+        document.write(
+          `Якщо у ${nameFirstChild} ${firstChildCandies} цукерок, а у ${nameSecondChild} ${secondChildCandies} цукерок, то більше цукерок у ${nameFirstChild}`
+        );
+      else if (secondChildCandies > firstChildCandies)
+        document.write(
+          `Якщо у ${nameFirstChild} ${firstChildCandies} цукерок, а у ${nameSecondChild} ${secondChildCandies} цукерок, то більше цукерок у ${nameSecondChild}`
+        );
+      else
+        document.write(
+          `Якщо у ${nameFirstChild} ${firstChildCandies} цукерок, а у ${nameSecondChild} ${secondChildCandies} цукерок, то цукерок порівну.`
+        );
+    </script>
+  </body>
+</html>
