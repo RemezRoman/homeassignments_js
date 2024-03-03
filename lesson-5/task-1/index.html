@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача -1</title>
+  </head>
+  <body>
+    <h1>Задача -1</h1>
+    <p>Вивести на екран номери місяців весни і літа (від 3 до 8)</p>
+    <script>
+      "use strict";
+      for (let monthNumber = 3; monthNumber <= 8; monthNumber++) {
+        if (monthNumber == 3)
+          document.write(`<div>Місяць ${monthNumber} - Березень</div>`);
+        else if (monthNumber == 4)
+          document.write(`<div>Місяць ${monthNumber} - Квітень</div>`);
+        else if (monthNumber == 5)
+          document.write(`<div>Місяць ${monthNumber} - Травень</div>`);
+        else if (monthNumber == 6)
+          document.write(`<div>Місяць ${monthNumber} - Червень</div>`);
+        else if (monthNumber == 7)
+          document.write(`<div>Місяць ${monthNumber} - Липень</div>`);
+        else if (monthNumber == 8)
+          document.write(`<div>Місяць ${monthNumber} - Серпень</div>`);
+      }
+    </script>
+  </body>
+</html>
