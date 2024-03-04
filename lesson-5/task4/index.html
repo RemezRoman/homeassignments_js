@@ -4,21 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Задача 2</title>
+    <title>Задача 4</title>
   </head>
   <body>
-    <h1>Задача 2</h1>
-    <p>Створити 10 елементів для введення цін продуктів</p>
+    <h1>Задача 4</h1>
+    <p>Вивести таблицю з 3 рядків і 7 стовпців</p>
     <script>
       "use strict";
-      document.write("<table>");
-      for (let product = 1; product <= 10; product++) {
+      document.write('<table border="2px">');
+      for (let row = 0; row < 3; row++) {
         document.write("<tr>");
-        document.write(`<td> 
-          <label> Product # ${product} <input type="text" /></label>
-        </td>`);
+        for (let cell = 1; cell <= 7; cell++) {
+          document.write(`<td> ${cell} </td>`);
+        }
         document.write("</tr>");
       }
+      document.write("</table>");
     </script>
   </body>
 </html>
