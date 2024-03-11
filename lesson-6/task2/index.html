@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>Вивести на екран A B C D E B C D E F C D E F G D E F G H E F G H I</p>
+    <script>
+      "use strict";
+      let letterA = "A".charCodeAt();
+      document.write("<table>");
+      for (let row = 0; row < 5; row++) {
+        document.write("<tr>");
+        for (let letterSymbol = 0; letterSymbol < 5; letterSymbol++) {
+          document.write(
+            `<td> ${String.fromCharCode(letterA + letterSymbol)} </td>`
+          );
+        }
+        letterA++;
+        document.write("</tr>");
+      }
+      document.write("</table>");
+    </script>
+  </body>
+</html>
