@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька
+      результатів: кількість парних, кількість додатних, кількість більших за
+      100.
+    </p>
+    <script>
+      "use strict";
+      function getTotalResult(userNumOne, userNumTwo, userNumThree) {
+        let evenNumbers = 0;
+        let positiveNumbers = 0;
+        let moreThan100 = 0;
+        let result;
+        if (userNumOne % 2 === 0) evenNumbers++;
+        if (userNumTwo % 2 === 0) evenNumbers++;
+        if (userNumThree % 2 === 0) evenNumbers++;
+        result = `парних ${evenNumbers}`;
+        if (userNumOne > 0) positiveNumbers++;
+        if (userNumTwo > 0) positiveNumbers++;
+        if (userNumThree > 0) positiveNumbers++;
+        result = `парних ${evenNumbers},positive${positiveNumbers}`;
+        if (userNumOne > 100) moreThan100++;
+        if (userNumTwo > 100) moreThan100++;
+        if (userNumThree > 100) moreThan100++;
+        result = `Ви ввели парних чисел: ${evenNumbers} <br>Додатніх чисел:${positiveNumbers}<br>Чисел більше за 100:${moreThan100}`;
+        return result;
+      }
+      let userNumOne = parseFloat(prompt("Введіть перше число"));
+      let userNumTwo = parseFloat(prompt("Введіть друге число"));
+      let userNumThree = parseFloat(prompt("Введіть третє число"));
+      document.write(
+        `Перше число було ${userNumOne},друге число ${userNumTwo}, третє число ${userNumThree}<br> Отже ${getTotalResult(
+          userNumOne,
+          userNumTwo,
+          userNumThree
+        )}`
+      );
+    </script>
+  </body>
+</html>

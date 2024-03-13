@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Створити окремі функції, які для 4 чисел знаходять: 1)суму; 2)добуток;
+      3)середнє арифметичне; 4)мінімальне значення.
+    </p>
+    <script>
+      "use strict";
+      function getSum(userNumOne, userNumTwo, userNumThree, userNumFour) {
+        return userNumOne + userNumTwo + userNumThree + userNumFour;
+      }
+      function getProduct(userNumOne, userNumTwo, userNumThree, userNumFour) {
+        return userNumOne * userNumTwo * userNumThree * userNumFour;
+      }
+      function getAverage(userNumOne, userNumTwo, userNumThree, userNumFour) {
+        return (userNumOne + userNumTwo + userNumThree + userNumFour) / 4;
+      }
+      function getMinValue(userNumOne, userNumTwo, userNumThree, userNumFour) {
+        let minValue;
+        let maxValue;
+        if (userNumOne < userNumTwo) {
+          maxValue = userNumTwo;
+          minValue = userNumOne;
+        } else {
+          maxValue = userNumOne;
+          minValue = userNumTwo;
+        }
+        if (userNumThree < minValue) {
+          maxValue = minValue;
+          minValue = userNumThree;
+        } else {
+          maxValue = userNumThree;
+        }
+        if (userNumFour < minValue) {
+          maxValue = minValue;
+          minValue = userNumFour;
+        }
+
+        return minValue;
+      }
+      let userNumOne = parseInt(prompt("Введіть перше число"));
+      let userNumTwo = parseInt(prompt("Введіть друге число"));
+      let userNumThree = parseInt(prompt("Введіть третє число"));
+      let userNumFour = parseInt(prompt("Введіть четверте число"));
+
+      let userChoiceNumber = parseInt(
+        prompt(
+          "Введіть номер що ви хочете знайти:\n1-суму \n 2-добуток \n 3-середнє арифметичне \n 4-мінімальне значення."
+        )
+      );
+
+      switch (userChoiceNumber) {
+        case 1:
+          document.write(
+            `Сума чисел =${getSum(
+              userNumOne,
+              userNumTwo,
+              userNumThree,
+              userNumFour
+            )}`
+          );
+          break;
+        case 2:
+          document.write(
+            `Добуток чисел =${getProduct(
+              userNumOne,
+              userNumTwo,
+              userNumThree,
+              userNumFour
+            )}`
+          );
+          break;
+        case 3:
+          document.write(
+            `Середнє арифметичне чисел =${getAverage(
+              userNumOne,
+              userNumTwo,
+              userNumThree,
+              userNumFour
+            )}`
+          );
+          break;
+        case 4:
+          document.write(
+            `Мінімальне число =${getMinValue(
+              userNumOne,
+              userNumTwo,
+              userNumThree,
+              userNumFour
+            )}`
+          );
+          break;
+        default:
+          document.write("Ви щось напутали(або я)");
+          break;
+      }
+    </script>
+  </body>
+</html>
