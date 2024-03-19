@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Дано послідовність цін товарів та назв (у окремих масивах). Вивести на
+      екран ті, які може собі дозволити користувач (кількість грошей задається).
+    </p>
+    <script>
+      "use strict";
+      let productsPrices = [1000, 20, 31, 429, 321, 28, 45, 986, 457, 333];
+      let productsTitles = [
+        "сир",
+        "хліб",
+        "сік",
+        "пиво",
+        "масло",
+        "вареники",
+        "пельмені",
+        "цукор",
+        "кава",
+        "вода",
+      ];
+      let userMoneyValue = parseFloat(prompt("Скільки у вас грошей?"));
+      for (let i = 0; i < productsPrices.length; i++) {
+        if (userMoneyValue >= productsPrices[i])
+          alert(
+            `Ви можете купити ${productsTitles[i]} за ${productsPrices[i]} грн`
+          );
+      }
+    </script>
+  </body>
+</html>

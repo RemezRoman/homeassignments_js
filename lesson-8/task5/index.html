@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>
+      Дано масив, який зберігає кількість відвідувачів магазину протягом тижня.
+      Вивести на екран:<br />
+      1)номери днів, протягом яких кількість відвідувачів була меншою за 20;<br />
+      2)номери днів, коли кількість відвідувачів була мінімальною;<br />
+      3)номери днів, коли кількість відвідувачів була максимальною;<br />
+      4)загальну кількість клієнтів у робочі дні та окремо загальну кількість
+      клієнтів на вихідних.
+    </p>
+    <script>
+      "use strict";
+      let visitorsPerWeek = [23, 13, 21, 14, 35, 56, 73];
+      // 1)
+      function lessThan20VisitorsDayNumbers(visitorsPerWeek) {
+        let daysLess20Visitors = [];
+        for (let i = 0; i < visitorsPerWeek.length; i++) {
+          if (visitorsPerWeek[i] < 20) daysLess20Visitors.push([i + 1]);
+        }
+        return daysLess20Visitors;
+      }
+      function minVisitorsDayNumber(visitorsPerWeek) {
+        let daysWithMinVisitors = [];
+        let minNumberOfVisitors = visitorsPerWeek[0];
+        for (let i = 1; i < visitorsPerWeek.length; i++) {
+          if (minNumberOfVisitors > visitorsPerWeek[i]) {
+            minNumberOfVisitors = visitorsPerWeek[i];
+            for (let j = 0; j < visitorsPerWeek.length; j++) {
+              if (visitorsPerWeek[j] === minNumberOfVisitors)
+                daysWithMinVisitors.push(j + 1);
+            }
+          }
+        }
+        return daysWithMinVisitors;
+      }
+      // 3)
+      function maxVisitorsDayNumber(visitorsPerWeek) {
+        let daysWithMaxVisitors = [];
+        let maxNumberOfVisitors = visitorsPerWeek[0];
+        for (let i = 1; i < visitorsPerWeek.length; i++) {
+          if (maxNumberOfVisitors < visitorsPerWeek[i]) {
+            maxNumberOfVisitors = visitorsPerWeek[i];
+            for (let j = 0; j < visitorsPerWeek.length; j++) {
+              if (visitorsPerWeek[j] === maxNumberOfVisitors)
+                daysWithMaxVisitors.push(j + 1);
+            }
+          }
+        }
+        return daysWithMaxVisitors;
+      }
+      // 4)
+      function totalVisitorsNumber(visitorsPerWeek) {
+        let visitorsOnWorkingDays = 0;
+        let visitorsOnWeekends = 0;
+        for (let i = 0; i < 5; i++) {
+          visitorsOnWorkingDays += visitorsPerWeek[i];
+        }
+        for (let j = 5; j < visitorsPerWeek.length; j++) {
+          visitorsOnWeekends += visitorsPerWeek[j];
+        }
+        document.write(
+          `В робочі дні було ${visitorsOnWorkingDays} людей, а у вихідні ${visitorsOnWeekends}`
+        );
+      }
+      let mentorsChoice = parseInt(
+        prompt(
+          "Яке завданя Вас цікавить?\n1)номери днів, протягом яких кількість відвідувачів була меншою за 20\n2)номери днів, коли кількість відвідувачів була мінімальною;\n3)номери днів, коли кількість відвідувачів була максимальною;\n4)загальну кількість клієнтів у робочі дні та окремо загальну кількість клієнтів на вихідних."
+        )
+      );
+      switch (mentorsChoice) {
+        case 1:
+          {
+            document.write(
+              `Кількість відвідувачів по днях:${visitorsPerWeek} <br>`
+            );
+            document.write(
+              `Менше за 20 людей було ${lessThan20VisitorsDayNumbers(
+                visitorsPerWeek
+              )}дня`
+            );
+          }
+          break;
+        case 2:
+          {
+            document.write(
+              `Кількість відвідувачів по днях:${visitorsPerWeek} <br>`
+            );
+            document.write(
+              `Найменше відвідувачів було ${minVisitorsDayNumber(
+                visitorsPerWeek
+              )}дня`
+            );
+          }
+          break;
+        case 3:
+          {
+            document.write(
+              `Кількість відвідувачів по днях:${visitorsPerWeek} <br>`
+            );
+            document.write(
+              `Найбільше відвідувачів було ${maxVisitorsDayNumber(
+                visitorsPerWeek
+              )}дня`
+            );
+          }
+          break;
+        case 4:
+          {
+            document.write(
+              `Кількість відвідувачів по днях:${visitorsPerWeek} <br>`
+            );
+            totalVisitorsNumber(visitorsPerWeek);
+          }
+          break;
+        default:
+          document.write("Ви ввели щось не те(або не ввели зовсім нічого)");
+          break;
+      }
+    </script>
+  </body>
+</html>

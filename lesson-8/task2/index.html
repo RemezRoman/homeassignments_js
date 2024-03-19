@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які
+      : • починаються на букву «А»; • перша і остання літери співпадають; •
+      складаються з більше ніш 5 символів;
+    </p>
+    <script>
+      "use strict";
+      let carNumbers = [
+        "AA1234BB",
+        "BC5678CA",
+        "KA4321AM",
+        "XA8765KB",
+        "PP1111KK",
+        "MO9999TX",
+        "AI7777II",
+        "AI5555IA",
+        "BB3333BB",
+        "TT0000TT",
+      ];
+      function getCarNumbersByFirstLetterA(carNumbers) {
+        let carNumbersFirstLetterA = 0;
+        for (let i = 0; i < carNumbers.length; i++) {
+          let carNumber = carNumbers[i];
+          if (carNumber[0] === "A") carNumbersFirstLetterA++;
+        }
+        return carNumbersFirstLetterA;
+      }
+      function getCarNumbersByFirstAndLastLetter(carNumbers) {
+        let carNumbersFirstAndLastLetter = 0;
+        for (let i = 0; i < carNumbers.length; i++) {
+          let carNumber = carNumbers[i];
+          let carNumberFirstLetter = carNumber[0];
+          let carNumberLastLetter = carNumber[carNumber.length - 1];
+          if (carNumberFirstLetter === carNumberLastLetter)
+            carNumbersFirstAndLastLetter++;
+        }
+        return carNumbersFirstAndLastLetter;
+      }
+      function getCarNumbersByLength(carNumbers) {
+        let carNumbersByLength = 0;
+        for (let i = 0; i < carNumbers.length; i++) {
+          if (carNumbers[i].length > 5) carNumbersByLength++;
+        }
+        return carNumbersByLength;
+      }
+      document.write(`Номери Машин:${carNumbers}<br>`);
+      document.write(
+        `<br>Кількість номерів, які починаються на букву "А"=${getCarNumbersByFirstLetterA(
+          carNumbers
+        )}<br>Кількість номерів де перша і остання літери співпадають=${getCarNumbersByFirstAndLastLetter(
+          carNumbers
+        )}<br>
+		  Кількість номерів, де номери складаються з більше ніж 5 символів=${getCarNumbersByLength(
+        carNumbers
+      )}`
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Дано одновимірний масив, у якому зберігається певна виграшна сума
+      (елементи заповнюються випадковим чином значеннями від -500 до 500).
+      Надаючи користувачу можливість вибирати номери елементів (поки він не
+      відмовиться). Знаходити сумарний виграш.
+    </p>
+    <script>
+      "use strict";
+      let prizeSumArray = [];
+      for (let i = 1; i <= 10; i++) {
+        prizeSumArray[i] = Math.floor(Math.random() * (500 - -500) + -500);
+      }
+
+      let winningSum = 0;
+      let answer;
+      do {
+        let userNumber = parseInt(prompt("Введіть Ваш номер від 1 до 10"));
+        winningSum += prizeSumArray[userNumber];
+        answer = confirm(
+          `Під номером ${userNumber} сума ${prizeSumArray[userNumber]}грн\nЗагальна сума виграшу = ${winningSum}\nПродовжимо?`
+        );
+      } while (answer);
+      document.write(`Ваш виграш ${winningSum}грн`);
+    </script>
+  </body>
+</html>
