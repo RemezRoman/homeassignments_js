@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Дано історію цін на цінні папери за деякий період (згенерувати від 1 до
+      10000)<br />
+      Сформувати новий масив, що міститиме значення цін у відсотках стосовно
+      максимального
+    </p>
+    <script>
+      "use strict";
+      let priceArray = [];
+      function getRandomPriceArray(arrayLength) {
+        for (let i = 0; i < arrayLength; i++) {
+          priceArray.push(Math.floor(Math.random() * 10001));
+        }
+        return priceArray;
+      }
+      document.write(`Масив цін: [ ${getRandomPriceArray(10)} ]`);
+      let maxValue = priceArray.reduce((prevMax, element) =>
+        element > prevMax ? element : prevMax
+      );
+      let arrayOfPercentOfMaxValue = [];
+      priceArray.reduce((prevValue, currentValue) => {
+        if (currentValue !== maxValue)
+          arrayOfPercentOfMaxValue.push((currentValue / maxValue) * 100);
+        return prevValue;
+      }, 0);
+      let finalArray = [];
+      for (const el of arrayOfPercentOfMaxValue) {
+        finalArray.push(`${el.toFixed(1) + "%"}`);
+      }
+      document.write(`<div>Максимальне значення:${maxValue}</div>`);
+      document.write(
+        `Масив значень цін у відсотках стосовно більшого:[ ${finalArray} ]`
+      );
+    </script>
+  </body>
+</html>

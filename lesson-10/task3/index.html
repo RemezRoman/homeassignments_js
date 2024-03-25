@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Дано історію цін на цінні папери за деякий період (згенерувати від 1 до
+      10000)<br />
+      Сформувати список з тих цін, які більші за попереднє значення
+    </p>
+    <script>
+      "use strict";
+      let priceArray = [];
+      function getRandomPriceArray(arrayLength) {
+        for (let i = 0; i < arrayLength; i++) {
+          priceArray.push(Math.floor(Math.random() * 10001));
+        }
+        return priceArray;
+      }
+      document.write(`Масив цін: [ ${getRandomPriceArray(10)} ]`);
+      let priceBiggerThanPreviousArray = [];
+      priceArray.reduce((prevValue, currentValue) => {
+        if (currentValue > prevValue)
+          priceBiggerThanPreviousArray.push(currentValue);
+        return currentValue;
+      });
+      document.write(
+        `<div>Масив з тих цін, які більші за попереднє значення: [ ${priceBiggerThanPreviousArray} ]</div>`
+      );
+    </script>
+  </body>
+</html>

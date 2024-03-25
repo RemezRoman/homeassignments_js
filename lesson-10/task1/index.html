@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Дано історію цін на цінні папери за деякий період (згенерувати від 1 до
+      10000)<br />
+      Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн.
+    </p>
+    <script>
+      "use strict";
+      let priceArray = [];
+      function getRandomPriceArray(arrayLength) {
+        for (let i = 0; i < arrayLength; i++) {
+          priceArray.push(Math.floor(Math.random() * 10001));
+        }
+        return priceArray;
+      }
+      document.write(`Масив цін: [ ${getRandomPriceArray(10)} ]`);
+      let priceArrayBiggerThan1000 = priceArray.filter((el) => el > 1000);
+      document.write(
+        `<div>Масив цін більших за 1000: [ ${priceArrayBiggerThan1000} ]</div>`
+      );
+    </script>
+  </body>
+</html>
