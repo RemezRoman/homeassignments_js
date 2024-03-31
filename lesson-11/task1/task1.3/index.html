@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>Знайти суми елементів у вказаній області</p>
+    <div>номери рядків (від половини до кінця, стовпці від 0 до половини</div>
+    <script>
+      "use strict";
+      function getRandomNumber(minNumber, maxNumber) {
+        return (
+          minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1))
+        );
+      }
+      function generateArray(colsNumber, minNumber, maxNumber) {
+        let arr = [];
+        for (let i = 0; i < colsNumber; i++) {
+          let randomNumber = getRandomNumber(minNumber, maxNumber);
+          arr.push(randomNumber);
+        }
+        return arr;
+      }
+      function generateRandomTable(
+        rowsNumber,
+        colsNumber,
+        minNumber,
+        maxNumber
+      ) {
+        let table = [];
+        for (let i = 0; i < rowsNumber; i++) {
+          let randomRow = generateArray(colsNumber, minNumber, maxNumber);
+          table.push(randomRow);
+        }
+        return table;
+      }
+      let table = generateRandomTable(10, 10, -100, 100);
+      console.log(table);
+      let secondRowHalfAndFirstColHalfSum = 0;
+      for (
+        let rowNumber = table.length / 2;
+        rowNumber < table.length;
+        rowNumber++
+      ) {
+        for (
+          let colNumber = 0;
+          colNumber < table[rowNumber].length / 2;
+          colNumber++
+        ) {
+          secondRowHalfAndFirstColHalfSum += table[rowNumber][colNumber];
+        }
+      }
+      console.log(secondRowHalfAndFirstColHalfSum);
+    </script>
+  </body>
+</html>

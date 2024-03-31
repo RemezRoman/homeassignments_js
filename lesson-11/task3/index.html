@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Морський бій. Випадковим чином на двовимірному полі розміром 6*6
+      розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра
+      продовжується поки не потоплено усі кораблі або у користувача не
+      закінчаться снаряди.
+    </p>
+    <script>
+      "use strict";
+      function generateBattleField(rowsNumber, colsNumber, shipsNumber) {
+        let battleField = [];
+        for (let rows = 0; rows < rowsNumber; rows++) {
+          let battleFieldCols = new Array(colsNumber).fill(0);
+          battleField.push(battleFieldCols);
+        }
+        for (let ships = 0; ships < shipsNumber; ) {
+          let row = Math.floor(Math.random() * rowsNumber);
+          let col = Math.floor(Math.random() * colsNumber);
+          if (battleField[row][col] !== 1) battleField[row][col] = 1;
+          ships++;
+        }
+        return battleField;
+      }
+      function battlefieldPlay(shipsNumber, misselesNumber, battleField) {
+        let message = "";
+        while (shipsNumber > 0 && misselesNumber > 0) {
+          let userRow = parseInt(
+            prompt("Введіть номер рядка куди бажаєте вистрілити")
+          );
+          let userCol = parseInt(
+            prompt("Введіть номер колонки куди бажаєте вистрілити")
+          );
+          misselesNumber--;
+          if (battleField[userRow][userCol] === 1) {
+            alert("Ви знищили корабель");
+            battleField[userRow][userCol] = 0;
+            shipsNumber--;
+          } else
+            alert(`Спробуйте ще, у Вас залишилось ${misselesNumber} снарядів`);
+        }
+        if (shipsNumber === 0) message = "ПЕРЕМОГА!";
+        else message = "Ви програли(";
+        return message;
+      }
+      function playGame(shipsNumber, misselesNumber, rowsNumber, colsNumber) {
+        let battleField = generateBattleField(
+          rowsNumber,
+          colsNumber,
+          shipsNumber
+        );
+        let result = battlefieldPlay(shipsNumber, misselesNumber, battleField);
+        return result;
+      }
+      let gameStart = playGame(5, 10, 6, 6);
+      alert(gameStart);
+    </script>
+  </body>
+</html>

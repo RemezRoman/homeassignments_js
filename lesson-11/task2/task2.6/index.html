@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти :</p>
+    <div>
+      сформувати загальний список (одновимірний масив) зі значенням, які що
+      більші за 200
+    </div>
+    <script>
+      "use strict";
+      function getRandomNumber(minNumber, maxNumber) {
+        return (
+          minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1))
+        );
+      }
+      function generateArray(shopsNumber, minNumber, maxNumber) {
+        let arr = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let shopNumber = getRandomNumber(minNumber, maxNumber);
+          arr.push(shopNumber);
+        }
+        return arr;
+      }
+      function generateRandomTable(
+        shopsNumber,
+        daysNumber,
+        minNumber,
+        maxNumber
+      ) {
+        let table = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let randomShop = generateArray(daysNumber, minNumber, maxNumber);
+          table.push(randomShop);
+        }
+        return table;
+      }
+      let table = generateRandomTable(10, 7, 1, 1000);
+      console.log(table);
+      function getValueGreater200(generateRandomTable) {
+        let valueGreater200 = [];
+        for (let shopsNumber = 0; shopsNumber < table.length; shopsNumber++) {
+          for (
+            let daysNumber = 0;
+            daysNumber < table[shopsNumber].length;
+            daysNumber++
+          ) {
+            let temp = table[shopsNumber][daysNumber];
+            if (temp > 200) valueGreater200.push(temp);
+          }
+        }
+        return valueGreater200;
+      }
+      let greater200 = getValueGreater200();
+      console.log(greater200);
+    </script>
+  </body>
+</html>

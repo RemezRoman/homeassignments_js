@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти :</p>
+    <div>загальний прибуток за робочі дні</div>
+    <script>
+      "use strict";
+      function getRandomNumber(minNumber, maxNumber) {
+        return (
+          minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1))
+        );
+      }
+      function generateArray(shopsNumber, minNumber, maxNumber) {
+        let arr = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let shopNumber = getRandomNumber(minNumber, maxNumber);
+          arr.push(shopNumber);
+        }
+        return arr;
+      }
+      function generateRandomTable(
+        shopsNumber,
+        daysNumber,
+        minNumber,
+        maxNumber
+      ) {
+        let table = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let randomShop = generateArray(daysNumber, minNumber, maxNumber);
+          table.push(randomShop);
+        }
+        return table;
+      }
+      let table = generateRandomTable(10, 7, 1, 1000);
+      console.log(table);
+      function getProfitPerWorkingDays(generateRandomTable) {
+        let workingDayProfit = 0;
+        for (let daysNumber = 0; daysNumber < 5; daysNumber++) {
+          let dayProfit = 0;
+          for (let shopsNumber = 0; shopsNumber < table.length; shopsNumber++) {
+            workingDayProfit += table[shopsNumber][daysNumber];
+          }
+        }
+        return workingDayProfit;
+      }
+      let profitPerWorkingDays = getProfitPerWorkingDays();
+      console.log(profitPerWorkingDays);
+    </script>
+  </body>
+</html>

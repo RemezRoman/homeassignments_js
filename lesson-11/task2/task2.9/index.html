@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 9</title>
+  </head>
+  <body>
+    <h1>Задача 9</h1>
+    <p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти :</p>
+    <div>
+      упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при
+      порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці
+      суми, на основі цих сум буде зрозуміло, який з елементів повинен іти
+      раніше).
+    </div>
+    <script>
+      "use strict";
+      function getRandomNumber(minNumber, maxNumber) {
+        return (
+          minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1))
+        );
+      }
+      function generateArray(shopsNumber, minNumber, maxNumber) {
+        let arr = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let shopNumber = getRandomNumber(minNumber, maxNumber);
+          arr.push(shopNumber);
+        }
+        return arr;
+      }
+      function generateRandomTable(
+        shopsNumber,
+        daysNumber,
+        minNumber,
+        maxNumber
+      ) {
+        let table = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let randomShop = generateArray(daysNumber, minNumber, maxNumber);
+          table.push(randomShop);
+        }
+        return table;
+      }
+      let table = generateRandomTable(10, 7, 1, 1000);
+      let sortedBySums = table.sort(
+        (shop1, shop2) =>
+          shop2.reduce((prevSum, value) => prevSum + value) -
+          shop1.reduce((prevSum, value) => prevSum + value)
+      );
+      console.log(sortedBySums);
+    </script>
+  </body>
+</html>

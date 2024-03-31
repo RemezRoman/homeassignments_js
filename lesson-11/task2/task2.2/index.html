@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти :</p>
+    <div>
+      загальний прибуток усіх магазинів по дням (загальний прибуток усіх
+      магазинів за понеділок, за вівторок, і т.д.);
+    </div>
+    <script>
+      "use strict";
+      function getRandomNumber(minNumber, maxNumber) {
+        return (
+          minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1))
+        );
+      }
+      function generateArray(shopsNumber, minNumber, maxNumber) {
+        let arr = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let shopNumber = getRandomNumber(minNumber, maxNumber);
+          arr.push(shopNumber);
+        }
+        return arr;
+      }
+      function generateRandomTable(
+        shopsNumber,
+        daysNumber,
+        minNumber,
+        maxNumber
+      ) {
+        let table = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let randomShop = generateArray(daysNumber, minNumber, maxNumber);
+          table.push(randomShop);
+        }
+        return table;
+      }
+      let table = generateRandomTable(10, 7, 1, 1000);
+      console.log(table);
+      // 		function getProfitPerDay(generateRandomTable, dayNumber) {
+      // 	let dayProfit = 0;
+      // 	for (let shopsNumber = 0; shopsNumber < table.length; shopsNumber++) {
+      // 	  dayProfit += table[shopsNumber][dayNumber];
+      // 	}
+      // 	return dayProfit;
+      //  }
+      //  let mondayProfit = getProfitPerDay(generateRandomTable, 0);
+      //  let tuesdayProfit = getProfitPerDay(generateRandomTable, 1);
+      //  let wednesdayProfit = getProfitPerDay(generateRandomTable, 2);
+      //  let thursdayProfit = getProfitPerDay(generateRandomTable, 3);
+      //  let fridayProfit = getProfitPerDay(generateRandomTable, 4);
+      //  let saturdayProfit = getProfitPerDay(generateRandomTable, 5);
+      //  let sundayProfit = getProfitPerDay(generateRandomTable, 6);
+      //  let profitPerDays = [
+      // 	mondayProfit,
+      // 	tuesdayProfit,
+      // 	wednesdayProfit,
+      // 	thursdayProfit,
+      // 	fridayProfit,
+      // 	saturdayProfit,
+      // 	sundayProfit,
+      //  ];
+      //  console.log(profitPerDays);
+      function getProfitPerDays(generateRandomTable) {
+        let profitPerDays = [];
+        for (
+          let daysNumber = 0;
+          daysNumber < table[daysNumber].length;
+          daysNumber++
+        ) {
+          let dayProfit = 0;
+          for (let shopsNumber = 0; shopsNumber < table.length; shopsNumber++) {
+            dayProfit += table[shopsNumber][daysNumber];
+          }
+          profitPerDays.push(dayProfit);
+        }
+        return profitPerDays;
+      }
+      console.log(getProfitPerDays());
+    </script>
+  </body>
+</html>

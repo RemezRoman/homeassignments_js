@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти :</p>
+    <div>максимальний прибуток за середу</div>
+    <script>
+      "use strict";
+      function getRandomNumber(minNumber, maxNumber) {
+        return (
+          minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1))
+        );
+      }
+      function generateArray(shopsNumber, minNumber, maxNumber) {
+        let arr = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let shopNumber = getRandomNumber(minNumber, maxNumber);
+          arr.push(shopNumber);
+        }
+        return arr;
+      }
+      function generateRandomTable(
+        shopsNumber,
+        daysNumber,
+        minNumber,
+        maxNumber
+      ) {
+        let table = [];
+        for (let i = 0; i < shopsNumber; i++) {
+          let randomShop = generateArray(daysNumber, minNumber, maxNumber);
+          table.push(randomShop);
+        }
+        return table;
+      }
+      let table = generateRandomTable(10, 7, 1, 1000);
+      console.log(table);
+      function getProfitPerWednesday(generateRandomTable) {
+        let wednesdayProfit = [];
+        let dayNumber = 2;
+        for (let shopsNumber = 0; shopsNumber < table.length; shopsNumber++) {
+          wednesdayProfit.push(table[shopsNumber][dayNumber]);
+        }
+        return wednesdayProfit;
+      }
+      let profitPerWednesday = getProfitPerWednesday();
+      let maxWednesdayProfit = profitPerWednesday.reduce((prevMax, el) =>
+        el > prevMax ? el : prevMax
+      );
+      console.log(maxWednesdayProfit);
+    </script>
+  </body>
+</html>
