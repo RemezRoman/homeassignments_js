@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Для розглянутих методів сортування спробувати вивести етапи сортування
+      шляхом виведення відповідних таблиць за зразком .
+    </p>
+    <script>
+      "use strict";
+      function generateRandomNumbersArray(arrayLength, maxNumber, minNumber) {
+        let randomNumbersArray = [];
+        for (let i = 0; i < arrayLength; i++) {
+          let randomNumber = Math.floor(
+            Math.random() * (maxNumber - minNumber + 1) + minNumber
+          );
+          randomNumbersArray.push(randomNumber);
+        }
+        return randomNumbersArray;
+      }
+      let randomNumbersArray = generateRandomNumbersArray(5, 10, 0);
+      let arrayForBubbleSorting = [...randomNumbersArray];
+      document.write(
+        `<div>Неупорядкований масив ${randomNumbersArray}<div><br>`
+      );
+      function sortArrayByBubble(arrayForBubbleSorting) {
+        let changeCount = 0;
+        let compareCount = 0;
+        let changed;
+        document.write(`Сортування Бульбашкою:<br><br>`);
+        do {
+          changed = false;
+          for (let i = 1; i < arrayForBubbleSorting.length; i++) {
+            compareCount++;
+            if (arrayForBubbleSorting[i - 1] > arrayForBubbleSorting[i]) {
+              let temp = arrayForBubbleSorting[i - 1];
+              arrayForBubbleSorting[i - 1] = arrayForBubbleSorting[i];
+              arrayForBubbleSorting[i] = temp;
+              changeCount++;
+              changed = true;
+              document.write(
+                `<div>Зараз масив виглядає так [ ${arrayForBubbleSorting}]<div>`
+              );
+            }
+          }
+        } while (changed);
+        return [changeCount, compareCount, arrayForBubbleSorting];
+      }
+      let sortByBubbleResult = sortArrayByBubble(arrayForBubbleSorting);
+      document.write("Упорядкований масив");
+      for (let i = 2; i < sortByBubbleResult.length; i++) {
+        document.write(`${sortByBubbleResult[i]}`);
+      }
+      document.write(
+        `<div>Змінено було ${sortByBubbleResult[0]} разів, порівняно було ${sortByBubbleResult[1]} разів<div>`
+      );
+      let arrayForInsertionSort = [...randomNumbersArray];
+      function insertionSortForArray(arrayForInsertionSort) {
+        let changeCount = 0;
+        let compareCount = 0;
+        document.write(`<br>Сортування Включенням:<br>`);
+        for (let k = 1; k < arrayForInsertionSort.length; k++) {
+          compareCount++;
+          let currentElement = arrayForInsertionSort[k];
+          let i = k - 1;
+          while (i >= 0 && arrayForInsertionSort[i] > currentElement) {
+            arrayForInsertionSort[i + 1] = arrayForInsertionSort[i];
+            i = i - 1;
+            changeCount++;
+            document.write(
+              `<div>Зараз масив виглядає так [ ${arrayForInsertionSort}]<div>`
+            );
+          }
+          arrayForInsertionSort[i + 1] = currentElement;
+        }
+        return [changeCount, compareCount, arrayForInsertionSort];
+      }
+      let insertionSortResult = insertionSortForArray(arrayForInsertionSort);
+      document.write("Упорядкований масив");
+      for (let i = 2; i < insertionSortResult.length; i++) {
+        document.write(`${insertionSortResult[i]}`);
+      }
+      document.write(
+        `<div>Змінено було ${insertionSortResult[0]} разів, порівняно було ${insertionSortResult[1]} разів<div>`
+      );
+      let arrayForCocktailSort = [...randomNumbersArray];
+      function cocktailSortForArray(arrayForCocktailSort) {
+        let changeCount = 0;
+        let compareCount = 0;
+        let leftIndex = 0;
+        let rightIndex = arrayForCocktailSort.length - 1;
+        document.write(`<br>Сортування змішанням:<br>`);
+        while (leftIndex < rightIndex) {
+          for (let i = leftIndex; i < rightIndex; i++) {
+            compareCount++;
+            if (arrayForCocktailSort[i] > arrayForCocktailSort[i + 1]) {
+              let temp = arrayForCocktailSort[i + 1];
+              arrayForCocktailSort[i + 1] = arrayForCocktailSort[i];
+              arrayForCocktailSort[i] = temp;
+              changeCount++;
+              document.write(
+                `<div>Зараз масив виглядає так [ ${arrayForCocktailSort}]<div>`
+              );
+            }
+          }
+          rightIndex--;
+          for (let i = rightIndex; i > leftIndex; i--) {
+            compareCount++;
+            if (arrayForCocktailSort[i] < arrayForCocktailSort[i - 1]) {
+              let temp = arrayForCocktailSort[i - 1];
+              arrayForCocktailSort[i - 1] = arrayForCocktailSort[i];
+              arrayForCocktailSort[i] = temp;
+              changeCount++;
+              document.write(
+                `<div>Зараз масив виглядає так [ ${arrayForCocktailSort}]<div>`
+              );
+            }
+          }
+          leftIndex++;
+        }
+        return [changeCount, compareCount, arrayForCocktailSort];
+      }
+      let cocktailSortResult = cocktailSortForArray(arrayForCocktailSort);
+      document.write("Упорядкований масив");
+      for (let i = 2; i < cocktailSortResult.length; i++) {
+        document.write(`${cocktailSortResult[i]}`);
+      }
+      document.write(
+        `<div>Змінено було ${cocktailSortResult[0]} разів, порівняно було ${cocktailSortResult[1]} разів<div>`
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та
+      порівнянь чисел під час сортування бульбашкою
+    </p>
+    <script>
+      "use strict";
+      function generateRandomNumbersArray(arrayLength, maxNumber, minNumber) {
+        let randomNumbersArray = [];
+        for (let i = 0; i < arrayLength; i++) {
+          let randomNumber = Math.floor(
+            Math.random() * (maxNumber - minNumber + 1) + minNumber
+          );
+          randomNumbersArray.push(randomNumber);
+        }
+        return randomNumbersArray;
+      }
+      let randomNumbersArray = generateRandomNumbersArray(30, 500, 0);
+      document.write(`<div>Неупорядкований масив ${randomNumbersArray}<div>`);
+      function sortArrayByBubble(randomNumbersArray) {
+        let changeCount = 0;
+        let compareCount = 0;
+        let changed;
+        do {
+          changed = false;
+          for (let i = 1; i < randomNumbersArray.length; i++) {
+            compareCount++;
+            if (randomNumbersArray[i - 1] > randomNumbersArray[i]) {
+              let temp = randomNumbersArray[i - 1];
+              randomNumbersArray[i - 1] = randomNumbersArray[i];
+              randomNumbersArray[i] = temp;
+              changeCount++;
+              changed = true;
+            }
+          }
+        } while (changed);
+        return [changeCount, compareCount, randomNumbersArray];
+      }
+      let result = sortArrayByBubble(randomNumbersArray);
+      document.write("Упорядкований масив");
+      for (let i = 2; i < result.length; i++) {
+        document.write(`${result[i]}`);
+      }
+      document.write(
+        `<div>Змінено було ${result[0]} разів, порівняно було ${result[1]} разів<div>`
+      );
+    </script>
+  </body>
+</html>
