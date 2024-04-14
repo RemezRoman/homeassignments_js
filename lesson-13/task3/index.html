@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Виведіть всі можливі наступні комбінації ходів користувачів у
+      грі“Хрестики-нулики”, починаючи з деякої заданої ситуації (тобто маємо
+      двовимірний масив з елементами : 0 - нулик, Х - хрестик, пробіл - ще не
+      зайнято, і вам треба самостійно вивести всі можливі шляхи заповнення ще
+      незаповнених клітинок (де пробіли). Поки можна не підраховувати чи вже є 3
+      хрестики чи 3 нулики у рядок.
+    </p>
+    <script>
+      "use strict";
+      let matrix = [
+        ["X", 0, " "],
+        [0, 0, " "],
+        ["X", " ", " "],
+      ];
+      function showMatrix(matrix) {
+        for (const iterator of matrix) {
+          document.write(`[${iterator}]<br>`);
+        }
+      }
+      // showMatrix(matrix);
+      let freeElements = 0;
+      for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          if (matrix[i][j] === " ") freeElements++;
+        }
+      }
+      function generateNewMatrix(matrix, freeElements, showMatrix) {
+        if (freeElements === 0) showMatrix(matrix);
+        else {
+          for (let row = 0; row < matrix.length; row++) {
+            for (let col = 0; col < matrix[row].length; col++) {
+              if (matrix[row][col] === " ") {
+                let matrixCopy1 = JSON.parse(JSON.stringify(matrix));
+                matrixCopy1[row][col] = 0;
+                generateNewMatrix(matrixCopy1, freeElements - 1, showMatrix);
+                let matrixCopy2 = JSON.parse(JSON.stringify(matrix));
+                matrixCopy2[row][col] = "X";
+                generateNewMatrix(matrixCopy2, freeElements - 1, showMatrix);
+              }
+            }
+          }
+        }
+      }
+      generateNewMatrix(matrix, freeElements, showMatrix);
+    </script>
+  </body>
+</html>

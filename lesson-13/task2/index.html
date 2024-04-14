@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Дано масив імен спортсменів. Розробити програму для виведення усіх
+      можливих результатів змагань (списки імен у відповідності до місць, які
+      вони займуть).
+    </p>
+    <script>
+      "use strict";
+      function generateArrays(array, resArr) {
+        if (array.length === 0) document.write(`${resArr}<br>`);
+        else {
+          for (const sportsman of array) {
+            generateArrays(
+              array.filter((el) => el !== sportsman),
+              [...resArr, sportsman]
+            );
+          }
+        }
+      }
+      generateArrays(["Petro", "Helena", "Olga"], []);
+    </script>
+  </body>
+</html>

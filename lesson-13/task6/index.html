@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      З використанням замикань розробити ітератор, тобто функцію, що буде
+      поступово за окремими викликами видавати по одну букву наперед заданого
+      слова. З використанням нього розробити гру «Прекладач». Виводимо для
+      користувача опис цього слова і по одну букву користувач вводить переклад
+      цього слова. Підрахувати кількість вгаданих букв.
+    </p>
+    <script>
+      "use strict";
+      let word = "June";
+      let description = "перший місяць літа";
+      function getWordIterator(word) {
+        let index = 0;
+        function getNextLetter() {
+          if (index === word.length) index = 0;
+          let result = word[index];
+          index++;
+          return result;
+        }
+        return getNextLetter;
+      }
+      function translateGame(word, description) {
+        alert(
+          `Загадане слово, це ${description}, відгадайте його англійською, воно містить ${word.length} букв(и)`
+        );
+        let wordByLetters = getWordIterator(word);
+        let guessedUsersLetters = 0;
+        let usersAnswers = [];
+        let rightLetter = [];
+        for (let i = 0; i < word.length; i++) {
+          rightLetter.push(wordByLetters().toLowerCase());
+        }
+        for (let i = 0; i < word.length; ) {
+          let userLetter = prompt(`Введіть ${i + 1} букву`).toLowerCase();
+          if (usersAnswers.includes(userLetter)) {
+            alert("Ви вже вводили цю літеру");
+            continue;
+          } else {
+            usersAnswers.push(userLetter);
+            i++;
+          }
+          if (rightLetter.includes(userLetter)) guessedUsersLetters++;
+        }
+        return [usersAnswers, guessedUsersLetters];
+      }
+      let [usersAnswers, guessedUsersLetters] = translateGame(
+        word,
+        description
+      );
+      document.write(
+        `Ви вгадали ${guessedUsersLetters} букв(и), ваші букви ${usersAnswers}, правильна відповідь була ${word}`
+      );
+    </script>
+  </body>
+</html>

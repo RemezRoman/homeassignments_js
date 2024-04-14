@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Дано масив хлопців і дівчат вивести всі можливі комбінації для танців з
+      хлопців і дівчат.
+    </p>
+    <script>
+      "use strict";
+      let boys = ["Ivan", "Petro", "Roman"];
+      let girls = ["Maria", "Olena", "Inna"];
+      function showPairs(resArr) {
+        for (const pair of resArr) {
+          document.write(`${pair} <br>`);
+        }
+      }
+      function generatePairs(boys, girls, resArr) {
+        if (boys.length === 0) showPairs(resArr);
+        else {
+          for (const name of girls) {
+            generatePairs(
+              boys.slice(1),
+              girls.filter((el) => el !== name),
+              [...resArr, `${boys[0]} - ${name}`]
+            );
+          }
+        }
+      }
+      generatePairs(boys, girls, []);
+    </script>
+  </body>
+</html>
