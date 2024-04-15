@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Описати масив об’єктів – сайтів розроблених компанією з такими
+      властивостями.7) Створити 2 окремих списки з копіями об’єктів, що містять
+      сайти з вартість до 10000 і більше 10000
+    </p>
+    <script>
+      "use strict";
+      let infoAboutSitesArray = [
+        {
+          companyName: "Apple",
+          companyOwner: "Tim Cook",
+          companySponsors: [
+            {
+              sponsorsSurname: " Doe",
+              sponsorsName: "John",
+              sponsorsDeposit: 100000,
+            },
+            {
+              sponsorsSurname: " Rob",
+              sponsorsName: "Bob",
+              sponsorsDeposit: 1200000,
+            },
+          ],
+          graduationYear: 1987,
+          cost: 1000,
+        },
+        {
+          companyName: "Visa",
+          companyOwner: "Roman Lib",
+          companySponsors: [
+            {
+              sponsorsSurname: " Dwayne",
+              sponsorsName: "Johnson",
+              sponsorsDeposit: 120000,
+            },
+            {
+              sponsorsSurname: " Connor ",
+              sponsorsName: "Sarah",
+              sponsorsDeposit: 1006000,
+            },
+          ],
+          graduationYear: 2005,
+          cost: 1340,
+        },
+        {
+          companyName: "Hustler",
+          companyOwner: "Elsa Lowrence",
+          companySponsors: [
+            {
+              sponsorsSurname: "VanKenobi",
+              sponsorsName: "Obi",
+              sponsorsDeposit: 155055,
+            },
+            {
+              sponsorsSurname: "Skywalker",
+              sponsorsName: "Luke",
+              sponsorsDeposit: 1100011,
+            },
+          ],
+          graduationYear: 2003,
+          cost: 8000,
+        },
+        {
+          companyName: "Valve",
+          companyOwner: "Gabe Newell",
+          companySponsors: [
+            {
+              sponsorsSurname: " Volochai",
+              sponsorsName: "Vitalii",
+              sponsorsDeposit: 4010000,
+            },
+            {
+              sponsorsSurname: " Bellingham",
+              sponsorsName: "Jude",
+              sponsorsDeposit: 10002000,
+            },
+          ],
+          graduationYear: 2010,
+          cost: 1050000,
+        },
+      ];
+      let sitesLess1000Copy = JSON.parse(JSON.stringify(infoAboutSitesArray));
+      let sitesGreater1000Copy = JSON.parse(
+        JSON.stringify(infoAboutSitesArray)
+      );
+      sitesLess1000Copy = sitesLess1000Copy.filter((el) => el.cost < 10000);
+      console.log(sitesLess1000Copy);
+      sitesGreater1000Copy = sitesGreater1000Copy.filter(
+        (el) => el.cost > 10000
+      );
+      console.log(sitesGreater1000Copy);
+    </script>
+  </body>
+</html>

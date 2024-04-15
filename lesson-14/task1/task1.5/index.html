@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Описати масив об’єктів – сайтів розроблених компанією з такими
+      властивостями.5) знайти рік, коли прибуток був найбільшим
+    </p>
+    <script>
+      "use strict";
+      let infoAboutSitesArray = [
+        {
+          companyName: "Apple",
+          companyOwner: "Tim Cook",
+          companySponsors: [
+            {
+              sponsorsSurname: " Doe",
+              sponsorsName: "John",
+              sponsorsDeposit: 100000,
+            },
+            {
+              sponsorsSurname: " Rob",
+              sponsorsName: "Bob",
+              sponsorsDeposit: 1200000,
+            },
+          ],
+          graduationYear: 1987,
+          cost: 100000,
+        },
+        {
+          companyName: "Visa",
+          companyOwner: "Roman Lib",
+          companySponsors: [
+            {
+              sponsorsSurname: " Dwayne",
+              sponsorsName: "Johnson",
+              sponsorsDeposit: 120000,
+            },
+            {
+              sponsorsSurname: " Connor ",
+              sponsorsName: "Sarah",
+              sponsorsDeposit: 1006000,
+            },
+          ],
+          graduationYear: 2005,
+          cost: 1340000,
+        },
+        {
+          companyName: "Hustler",
+          companyOwner: "Elsa Lowrence",
+          companySponsors: [
+            {
+              sponsorsSurname: "VanKenobi",
+              sponsorsName: "Obi",
+              sponsorsDeposit: 155055,
+            },
+            {
+              sponsorsSurname: "Skywalker",
+              sponsorsName: "Luke",
+              sponsorsDeposit: 1100011,
+            },
+          ],
+          graduationYear: 2003,
+          cost: 155500000,
+        },
+        {
+          companyName: "Valve",
+          companyOwner: "Gabe Newell",
+          companySponsors: [
+            {
+              sponsorsSurname: " Volochai",
+              sponsorsName: "Vitalii",
+              sponsorsDeposit: 4010000,
+            },
+            {
+              sponsorsSurname: " Bellingham",
+              sponsorsName: "Jude",
+              sponsorsDeposit: 10002000,
+            },
+          ],
+          graduationYear: 2010,
+          cost: 1050000,
+        },
+      ];
+      let yearWithMaxProfit = 0;
+      let maxProfit = 0;
+      for (const site of infoAboutSitesArray) {
+        if (site.cost > maxProfit) maxProfit = site.cost;
+        yearWithMaxProfit = site.graduationYear;
+      }
+      document.write(yearWithMaxProfit);
+      console.log(infoAboutSitesArray);
+    </script>
+  </body>
+</html>
