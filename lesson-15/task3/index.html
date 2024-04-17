@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>Розробити клас MultChecker для перевірки таблиці множення</p>
+    <img src="/lesson-15/img/task3.png" alt="" />
+    <script>
+      "use strict";
+      class MultChecker {
+        constructor(number, rightAnswerCount = 0, wrongAnswerCount = 0) {
+          this.number = number;
+          this.rightAnswerCount = rightAnswerCount;
+          this.wrongAnswerCount = wrongAnswerCount;
+        }
+        genereteExample(min = 0, max = 10) {
+          let randomNumber = Math.floor(Math.random() * (max - min + 1) - min);
+          let example = `${randomNumber} * ${this.number}`;
+          let result = randomNumber * this.number;
+          return [example, result];
+        }
+        checkAnswer() {
+          let userChoice;
+          do {
+            let example = this.genereteExample();
+            let userAnswer = parseInt(prompt(`Скільки буде ${example[0]}`));
+            if (userAnswer === example[1]) {
+              this.rightAnswerCount++;
+              alert(
+                `Вірно, у Вас ${this.rightAnswerCount} правильних відповідей`
+              );
+            } else {
+              this.wrongAnswerCount++;
+              alert(
+                `Невірно, у Вас ${this.wrongAnswerCount} неправильних відповідей`
+              );
+            }
+            userChoice = confirm("Продовжуємо?");
+          } while (userChoice);
+        }
+        render() {
+          document.write(
+            `<div>Правильних відповідей - ${this.rightAnswerCount}</div><div>Неправильних відповідей - ${this.wrongAnswerCount}`
+          );
+        }
+      }
+      let ex1 = new MultChecker(4);
+      ex1.checkAnswer();
+      ex1.render();
+    </script>
+  </body>
+</html>

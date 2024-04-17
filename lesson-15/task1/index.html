@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Cтворити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є
+      заєць і 0 в іншому випадку.
+    </p>
+    <img src="/lesson-15/img/tyr.png" alt="" />
+    <script>
+      "use strict";
+      let shootingRange = {
+        rabbitsField: [1, 1, 0, 0, 0, 1, 0, 1],
+        userShoot: function () {
+          let shoot = parseInt(
+            prompt(`Введіть номер мішені від 1 до ${this.rabbitsField.length}`)
+          );
+          if (
+            shoot > 0 &&
+            shoot <= this.rabbitsField.length &&
+            this.rabbitsField[shoot - 1] === 1
+          )
+            alert("Ви влучили");
+          else if (!shoot) alert("Ви забули вістрілити");
+          else if (shoot < 0 || shoot > this.rabbitsField.length)
+            alert(
+              `Такої мішені немає, стріляйте від 1 до ${this.rabbitsField.length}`
+            );
+          else alert("Ви не влучили");
+        },
+        toString: function () {
+          let table = document.write(
+            `<div>Ігрове поле:</div><table border="2px">`
+          );
+          document.write("<tr>");
+          for (let i = 0; i < this.rabbitsField.length; i++) {
+            document.write(`<td>${this.rabbitsField[i]}</td>`);
+          }
+          document.write("</tr>");
+          document.write("</table>");
+          return table;
+        },
+      };
+      shootingRange.userShoot();
+      shootingRange.toString();
+    </script>
+  </body>
+</html>

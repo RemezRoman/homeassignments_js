@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+    <style>
+      img {
+        display: flex;
+        margin: 0px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <a href=""></a>
+    <h1>Задача 4</h1>
+    <p>Розробити клас Baner</p>
+    <script>
+      "use strict";
+      let banersList = [
+        {
+          img: '<img src="/lesson-15/img/task4_img/01.jpg" alt="" />',
+          link: "https://facebook.com/",
+        },
+        {
+          img: '<img src="/lesson-15/img/task4_img/02.jpg" alt="" />',
+          link: "https://www.youtube.com/",
+        },
+        {
+          img: '<img src="/lesson-15/img/task4_img/03.jpg" alt="" />',
+          link: "https://instagram.com/",
+        },
+        {
+          img: '<img src="/lesson-15/img/task4_img/04.jpg" alt="" />',
+          link: "https://twitch.tv/",
+        },
+      ];
+      class Baner {
+        constructor(banersList) {
+          this.banersList = banersList;
+        }
+        getRandomBaner() {
+          let randomIndex = Math.floor(Math.random() * banersList.length);
+          return this.banersList[randomIndex];
+        }
+        render() {
+          let randomBaner = this.getRandomBaner();
+          document.write(
+            `<a target="_blank" href="${randomBaner.link}">${randomBaner.img}</a>`
+          );
+        }
+      }
+      let test = new Baner(banersList);
+      test.render();
+    </script>
+  </body>
+</html>

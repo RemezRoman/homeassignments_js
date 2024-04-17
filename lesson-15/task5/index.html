@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>Розробити клас «Керівник танців»</p>
+    <img src="/lesson-15/img/task5.png" alt="" />
+    <script>
+      "use strict";
+      let boysList = ["Ivan", "Petro", "Roman", "Leonid"];
+      let girlsList = ["Olga", "Maria", "Inna", "Anna"];
+
+      class DancingTeacher {
+        constructor(boysList, girlsList) {
+          this.boysList = boysList;
+          this.girlsList = girlsList;
+        }
+        getRandomBoy() {
+          let randomIndex = Math.floor(Math.random() * boysList.length);
+          return this.boysList[randomIndex];
+        }
+        getRandomGirl() {
+          let randomIndex = Math.floor(Math.random() * girlsList.length);
+          return this.girlsList[randomIndex];
+        }
+        showDancingPair() {
+          let randomBoy = this.getRandomBoy();
+          let randomGirl = this.getRandomGirl();
+          return document.write(
+            `<div>Пара: ${randomBoy} - ${randomGirl}</div>`
+          );
+        }
+        run() {
+          setInterval(() => this.showDancingPair(), 5000);
+        }
+      }
+      let test = new DancingTeacher(boysList, girlsList);
+      test.run();
+    </script>
+  </body>
+</html>

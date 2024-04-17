@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 0</title>
+  </head>
+  <body>
+    <h1>Задача 0</h1>
+    <p>
+      Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з
+      них є функція знаходження суми, а у іншому – функція для знаходження
+      добутку тих, які знаходяться між заданими мінімальним і максимальних
+      значенням. <br />Використати обидва методи стосовно обидвох об’єктів
+      (використати call, apply)
+    </p>
+    <script>
+      "use strict";
+      let objectOne = {
+        numbersArray: [7, 14, 22, 5, 13, 33, 12, 15, 1],
+        getSum: function () {
+          return this.numbersArray.reduce((prevSum, el) => prevSum + el, 0);
+        },
+      };
+      let objectTwo = {
+        numbersArray: [5, 11, 2, 25, 23, 3, 19, 35, 12],
+        getProduct(min, max) {
+          return this.numbersArray.reduce(
+            (prevSum, el) => (el > min && el < max ? prevSum * el : prevSum),
+            1
+          );
+        },
+      };
+      let sum1 = objectOne.getSum();
+      let sum2 = objectOne.getSum.call(objectTwo);
+      let prod2 = objectTwo.getProduct(0, 6);
+      let prod1 = objectTwo.getProduct.apply(objectOne, [1, 8]);
+      console.log(sum1);
+      console.log(sum2);
+      console.log(prod1);
+      console.log(prod2);
+    </script>
+  </body>
+</html>
