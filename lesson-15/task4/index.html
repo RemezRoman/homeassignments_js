@@ -20,19 +20,19 @@
       "use strict";
       let banersList = [
         {
-          img: '<img src="/lesson-15/img/task4_img/01.jpg" alt="" />',
+          img: "/lesson-15/img/task4_img/01.jpg",
           link: "https://facebook.com/",
         },
         {
-          img: '<img src="/lesson-15/img/task4_img/02.jpg" alt="" />',
+          img: "/lesson-15/img/task4_img/02.jpg",
           link: "https://www.youtube.com/",
         },
         {
-          img: '<img src="/lesson-15/img/task4_img/03.jpg" alt="" />',
+          img: "/lesson-15/img/task4_img/03.jpg",
           link: "https://instagram.com/",
         },
         {
-          img: '<img src="/lesson-15/img/task4_img/04.jpg" alt="" />',
+          img: "/lesson-15/img/task4_img/04.jpg",
           link: "https://twitch.tv/",
         },
       ];
@@ -47,7 +47,7 @@
         render() {
           let randomBaner = this.getRandomBaner();
           document.write(
-            `<a target="_blank" href="${randomBaner.link}">${randomBaner.img}</a>`
+            `<a target="_blank" href="${randomBaner.link}"><img src="${randomBaner.img}"/></a>`
           );
         }
       }
