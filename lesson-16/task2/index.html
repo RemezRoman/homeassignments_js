@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Створити клас TMoney для роботи з грошовими сумами. Сума повинна
+      зберігатися у вигляді доларового еквіваленту. Реалізувати методи
+      додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та
+      визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс
+      долара зберігати в окремому полі.
+    </p>
+    <script>
+      "use strict";
+      class TMoney {
+        #wallet;
+        constructor(moneyValue, dollarRate) {
+          this.dollarRate = dollarRate;
+          this.Wallet = this.currencyExchange(moneyValue);
+        }
+        get Wallet() {
+          return this.#wallet;
+        }
+        set Wallet(val) {
+          if (val < 0) throw new Error("Неподпустиме значення");
+          this.#wallet = val;
+        }
+        currencyExchange(val) {
+          return val / this.dollarRate;
+        }
+        addingMoney(val) {
+          this.Wallet += this.currencyExchange(val);
+        }
+        withdrawingMoney(val) {
+          if (this.currencyExchange(val) > this.Wallet)
+            throw new Error("Недостатньо коштів на рахунку");
+          this.Wallet -= this.currencyExchange(val);
+        }
+        increaseMoneyFor100Hrn() {
+          let sum = this.Wallet * this.dollarRate;
+          sum = ((sum + 100) / this.Wallet).toFixed(2);
+          return `Щоб сума збільшилась на 100 грн, курс має бути:${sum}`;
+        }
+        toString() {
+          return `На Вашому рахунку ${this.Wallet.toFixed(2)}$ при курсі ${
+            this.dollarRate
+          } `;
+        }
+      }
+      let currentDollarRate = 39.73;
+      let ex1 = new TMoney(0, currentDollarRate);
+      ex1.addingMoney(7000);
+      ex1.withdrawingMoney(700);
+      console.log(ex1);
+      console.log(ex1.Wallet);
+      document.write(ex1.increaseMoneyFor100Hrn());
+    </script>
+  </body>
+</html>

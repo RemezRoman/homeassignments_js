@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      <img src="../img/task3.png" alt="" />
+    </p>
+    <script>
+      "use strict";
+      class FoundationDate {
+        #year;
+        #month;
+        constructor(year, month) {
+          this.Year = year;
+          this.Month = month;
+        }
+        get Year() {
+          return this.#year;
+        }
+        set Year(val) {
+          if (val < 0 || val > 2024)
+            throw new Error("Некоректний рік заснування");
+          this.#year = val;
+        }
+        get Month() {
+          return this.#month;
+        }
+        set Month(val) {
+          if (val < 0 || val > 12)
+            throw new Error("Некоректний рік заснування");
+          this.#month = val;
+        }
+        toString() {
+          return `${this.Month}.${this.Year}`;
+        }
+      }
+      class Services {
+        #name;
+        #cost;
+        #executionTerm;
+        constructor(name, cost, executionTerm) {
+          this.Name = name;
+          this.Cost = cost;
+          this.ExecutionTerm = executionTerm;
+        }
+        get Name() {
+          return this.#name;
+        }
+        set Name(val) {
+          if (val.length === 0) throw new Error("Некоректна назва послуги");
+          this.#name = val;
+        }
+        get Cost() {
+          return this.#cost;
+        }
+        set Cost(val) {
+          if (val < 0) throw new Error("Некоректна вартість послуги");
+          this.#cost = val;
+        }
+        get ExecutionTerm() {
+          return this.#executionTerm;
+        }
+        set ExecutionTerm(val) {
+          if (val < 1) throw new Error("Некоректний термін виконання послуги");
+          this.#executionTerm = val;
+        }
+        toString() {
+          return `${this.Name}`;
+        }
+      }
+      class BranchesAdress {
+        #country;
+        #city;
+        #street;
+        #house;
+        constructor(country, city, street, house) {
+          this.Country = country;
+          this.City = city;
+          this.Street = street;
+          this.House = house;
+        }
+        get Country() {
+          return this.#country;
+        }
+        set Country(val) {
+          if (val.length === 0) throw new Error("Невірна назва країни");
+          this.#country = val;
+        }
+        get City() {
+          return this.#city;
+        }
+        set City(val) {
+          if (val.length === 0) throw new Error("Невірна назва міста");
+          this.#city = val;
+        }
+        get Street() {
+          return this.#street;
+        }
+        set Street(val) {
+          if (val.length === 0) throw new Error("Невірна назва вулиці");
+          this.#street = val;
+        }
+        get House() {
+          return this.#house;
+        }
+        set House(val) {
+          if (val.length === 0) throw new Error("Невірна назва вулиці");
+          this.#house = val;
+        }
+        toString() {
+          return `${this.City} ${this.Street} ${this.House}`;
+        }
+      }
+      class Firm {
+        constructor(title, foundationDate, services, branchesAdress) {
+          this.title = title;
+          this.foundationDate = foundationDate;
+          this.services = services;
+          this.branchesAdress = branchesAdress;
+        }
+        get exictensTerm() {
+          return 2024 - this.foundationDate.Year;
+        }
+        showBranchesInCity(val) {
+          let adress;
+          adress = this.branchesAdress.filter((branch) => branch.City === val);
+          return adress;
+        }
+        showServices(cost, term) {
+          let availableService;
+          availableService = this.services.filter(
+            (service) => cost >= service.Cost && term >= service.ExecutionTerm
+          );
+          return availableService;
+        }
+        toString() {
+          return `Фірма "${this.title}" засонована ${this.foundationDate}<br>Ми пропонуємо:${this.services}<br>Наші філіали:${this.branchesAdress}`;
+        }
+      }
+      let foundationDate = new FoundationDate(2010, 4);
+      let services = [
+        new Services("Ремонт балкону", 20000, 7),
+        new Services("Ремонт підлоги", 7000, 4),
+        new Services("Встановлення вікон", 30000, 2),
+      ];
+      let branchesAdress = [
+        new BranchesAdress("Україна", "Київ", "Автозаводська", "79"),
+        new BranchesAdress("Україна", "Київ", "Полярна", "14"),
+        new BranchesAdress("Україна", "Вишгород", "Шолуденка", "13"),
+      ];
+      let firm1 = new Firm(
+        "Ремонт для всіх",
+        foundationDate,
+        services,
+        branchesAdress
+      );
+      // console.log(firm1.exictensTerm);
+      // document.write(firm1);
+      // document.write(firm1.showBranchesInCity("Київ"));
+      // document.write(firm1.showServices(32000, 4));
+    </script>
+  </body>
+</html>

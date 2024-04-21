@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата
+      представляється структурою із трьома полями. Реалізувати методи
+      збільшення/зменшення дати на певну кількість днів, місяців чи років.
+      Введення та виведення дати реалізувати за допомогою методу toString.
+    </p>
+    <script>
+      "use strict";
+      class TDate {
+        #day;
+        #month;
+        constructor(day, month, year) {
+          this.Day = day;
+          this.Month = month;
+          this.year = year;
+        }
+        get Day() {
+          return this.#day;
+        }
+        set Day(val) {
+          if (val <= 0 || val > 31) throw new Error("Недопустиме значення дня");
+          this.#day = val;
+        }
+        get Month() {
+          return this.#month;
+        }
+        set Month(val) {
+          if (val <= 0 || val > 12)
+            throw new Error("Недопустиме значення місяця");
+          this.#month = val;
+        }
+        correctDays(newDays) {
+          if (newDays > 31) {
+            let newMonthes = this.Month + Math.floor((newDays - 1) / 31);
+            if (newMonthes > 12) this.correctMonthes(newMonthes);
+            else this.Month = newMonthes;
+            if (newDays % 31 === 0) this.Day = 31;
+            else this.Day = newDays % 31;
+          } else this.Day = newDays;
+          // else if (newDays < 1) {
+          //        newDays = newDays - newDays * 2;
+          //        // console.log(newDays);
+          //        // let newMonthes = this.Month + Math.floor((newDays - 1) / 31);
+          //        if (newDays === 0 || newDays % 31 === 0) this.Day = 31;
+          //        else {
+          //          newDays = (this.Day + newDays) % 31;
+          //          this.correctDays(newDays);
+          //        }
+          //      }
+        }
+        correctMonthes(newMonthes) {
+          if (newMonthes > 12) {
+            this.year += Math.floor(newMonthes / 12);
+            if (newMonthes % 12 === 0) this.Month = 12;
+            else this.Month = newMonthes % 12;
+          } else this.Month = newMonthes;
+        }
+        increaseDays(val) {
+          let newDays = this.Day + val;
+          this.correctDays(newDays);
+        }
+        increaseMonthes(val) {
+          let newMonthes = this.Month + val;
+          this.correctMonthes(newMonthes);
+        }
+        incereaseYears(val) {
+          this.year += val;
+        }
+        //   decreaseDays(val) {
+        //     let newDays = this.Day - val;
+        //     this.correctDays(newDays);
+        //   }
+        toString() {
+          return `${this.Day}.${this.Month}.${this.year}`;
+        }
+      }
+      let newdate = new TDate(2, 4, 2024);
+      // newdate.increaseDays(3212);
+      // newdate.increaseMonthes(220);
+      // newdate.incereaseYears(444);
+      // не зовсім зрозумів логіку, як треба описати зменшення днів, хотілось би, щоб на уроці такий приклад розлянули
+    </script>
+  </body>
+</html>
