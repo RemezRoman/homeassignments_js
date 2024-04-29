@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      Користувач задає кількість оцінок і натискає на кнопку «get table». В
+      результаті формується таблиця з input, куди користувач вводить оцінки.
+      Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+    </p>
+    <script>
+      "use strict";
+      function createMarksField() {
+        const marksDiv = document.createElement("div");
+        marksDiv.innerText = "Marks number";
+
+        const marksInput = document.createElement("input");
+        marksInput.setAttribute("placeholder", "0");
+        marksInput.setAttribute("type", "number");
+        marksInput.setAttribute("id", "marks");
+
+        const marksButtonDiv = document.createElement("div");
+        const marksButton = document.createElement("button");
+        marksButton.innerText = "Get Table";
+        marksButton.setAttribute("id", "marks-button");
+        marksButton.addEventListener("click", () => createMarksTable());
+        marksButton.addEventListener("click", () => createSumField());
+        marksButtonDiv.append(marksButton);
+
+        marksDiv.append(marksInput);
+        marksDiv.append(marksButtonDiv);
+        marksDiv.append(document.createElement("hr"));
+        document.body.append(marksDiv);
+        return marksDiv;
+      }
+      function createMarksTable() {
+        const marks = parseInt(document.getElementById("marks").value);
+        const marksTableDiv = document.createElement("div");
+        for (let i = 0; i < marks; i++) {
+          let input = document.createElement("input");
+          input.setAttribute("type", "number");
+          input.className = "mark";
+          marksTableDiv.append(input);
+        }
+        marksTableDiv.append(document.createElement("hr"));
+        document.body.append(marksTableDiv);
+        return marksTableDiv;
+      }
+      function onSumButtonClick() {
+        const marks = document.getElementsByClassName("mark");
+        let sum = 0;
+        const totalMarks = parseInt(document.getElementById("marks").value);
+        for (const mark of marks) {
+          sum += parseInt(mark.value);
+        }
+        const average = sum / totalMarks;
+        const sumDiv = document.createElement("div");
+        const sumSpan = document.createElement("span");
+        sumSpan.innerText = `sum=${average}`;
+        sumDiv.append(sumSpan);
+        const sumBlockDiv = document.getElementsByClassName("sum-block")[0];
+        sumBlockDiv.append(sumDiv);
+      }
+      function createSumField() {
+        const sumBlockDiv = document.createElement("div");
+        sumBlockDiv.className = "sum-block";
+        const sumButton = document.createElement("button");
+        sumButton.setAttribute("id", "sum-button");
+        sumButton.addEventListener("click", () => onSumButtonClick());
+        sumButton.innerText = "get sum";
+
+        sumBlockDiv.append(sumButton);
+        document.body.append(sumBlockDiv);
+      }
+      createMarksField();
+      window.onload = function () {};
+    </script>
+  </body>
+</html>

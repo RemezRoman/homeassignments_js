@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 7</title>
+    <style>
+      .main-div {
+        display: flex;
+        gap: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Задача 7</h1>
+    <p>
+      Подорож складається з 3 етапів. На кожному етапі користувач може вибрати
+      один з видів транспорту (авто, автобус, літак - випадаючий список),
+      харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х
+      гідів(використати - radio buttons). Ціни визначте самі. Підрахувати
+      загальну вартість.
+    </p>
+
+    <script>
+      "use strict";
+      const mainDiv = document.createElement("div");
+      mainDiv.className = "main-div";
+      document.body.append(mainDiv);
+      function firstStage() {
+        const stageDiv = document.createElement("div");
+        const stageLabel = document.createElement("label");
+        stageLabel.innerText = "Виберіть один з виду транспорту:";
+        const select = document.createElement("select");
+        const selectAuto = document.createElement("option");
+        const selectBus = document.createElement("option");
+        const selectPlane = document.createElement("option");
+
+        selectAuto.setAttribute("value", "5000");
+        selectAuto.innerText = "Авто";
+
+        selectBus.setAttribute("value", "4000");
+        selectBus.innerText = "Автобус";
+
+        selectPlane.setAttribute("value", "8000");
+        selectPlane.innerText = "Літак";
+        select.append(selectAuto);
+        select.append(selectBus);
+        select.append(selectPlane);
+
+        stageLabel.append(select);
+
+        stageDiv.append(stageLabel);
+
+        document.getElementsByClassName("main-div")[0].append(stageDiv);
+      }
+      function secondStage() {
+        const stageDiv = document.createElement("div");
+        stageDiv.innerText = "Виберіть харчування:";
+
+        const breakfastLabel = document.createElement("label");
+        breakfastLabel.innerText = "Сніданок";
+        const breakfast = document.createElement("input");
+        breakfast.setAttribute("type", "checkbox");
+        breakfast.setAttribute("value", "700");
+        breakfastLabel.append(breakfast);
+
+        const lunchLabel = document.createElement("label");
+        lunchLabel.innerText = "Обід";
+        const lunch = document.createElement("input");
+        lunch.setAttribute("type", "checkbox");
+        lunch.setAttribute("value", "500");
+        lunchLabel.append(lunch);
+
+        const dinnerLabel = document.createElement("label");
+        dinnerLabel.innerText = "Вечеря";
+        const dinner = document.createElement("input");
+        dinner.setAttribute("type", "checkbox");
+        dinner.setAttribute("value", "900");
+        dinnerLabel.append(dinner);
+
+        stageDiv.append(breakfastLabel);
+        stageDiv.append(lunchLabel);
+        stageDiv.append(dinnerLabel);
+
+        document.getElementsByClassName("main-div")[0].append(stageDiv);
+      }
+      function thirdStage() {
+        const stageDiv = document.createElement("div");
+        stageDiv.innerText = "Виберіть одного гіда:";
+
+        const guidLabel1 = document.createElement("label");
+        guidLabel1.innerText = "Василь Вірастюк";
+        const guidInput1 = document.createElement("input");
+        guidInput1.setAttribute("type", "radio");
+        guidInput1.setAttribute("value", "1000");
+        guidLabel1.append(guidInput1);
+
+        const guidLabel2 = document.createElement("label");
+        guidLabel2.innerText = "Андрій Шевченко";
+        const guidInput2 = document.createElement("input");
+        guidInput2.setAttribute("type", "radio");
+        guidInput2.setAttribute("value", "1500");
+        guidLabel2.append(guidInput2);
+
+        const guidLabel3 = document.createElement("label");
+        guidLabel3.innerText = "Володимир Кличко";
+        const guidInput3 = document.createElement("input");
+        guidInput3.setAttribute("type", "radio");
+        guidInput3.setAttribute("value", "2000");
+        guidLabel3.append(guidInput3);
+
+        stageDiv.append(guidLabel1);
+        stageDiv.append(guidLabel2);
+        stageDiv.append(guidLabel3);
+
+        document.getElementsByClassName("main-div")[0].append(stageDiv);
+      }
+      function createButtonArea() {
+        const buttonDiv = document.createElement("div");
+        const totalValueButton = document.createElement("button");
+        const totalPrice = document.createElement("span");
+        totalPrice.setAttribute("id", "price");
+        totalValueButton.innerText = "Розрахувати вартість";
+        buttonDiv.append(totalValueButton);
+        buttonDiv.append(totalPrice);
+        document.body.append(buttonDiv);
+      }
+      function getTotalPrice() {
+        const transportList = document.querySelectorAll("option");
+        let transportPrice = 0;
+        for (const transport of transportList) {
+          if (transport.selected) transportPrice = parseInt(transport.value);
+        }
+
+        const foodList = document.querySelectorAll("input[type=checkbox]");
+        let foodPrice = 0;
+        for (const food of foodList) {
+          if (food.checked) foodPrice += parseInt(food.value);
+        }
+
+        const guidList = document.querySelectorAll("input[type=radio]");
+        let guidPrice = 0;
+        for (const guid of guidList) {
+          if (guid.checked) guidPrice += parseInt(guid.value);
+        }
+
+        let totalPrice = 0;
+        totalPrice = transportPrice + foodPrice + guidPrice;
+        const priceSpan = document.getElementById("price");
+        priceSpan.innerText = totalPrice;
+      }
+      window.onload = function () {
+        firstStage();
+        secondStage();
+        thirdStage();
+        createButtonArea();
+        document.querySelector("button").onclick = getTotalPrice;
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>Зробити конвертер валют (курси валют – константи у скрипті)</p>
+    <img src="../img/task2.png" alt="" />
+    <div>
+      <label>
+        Сума в гривнях
+        <input placeholder="0" type="number" id="hrn" />
+      </label>
+    </div>
+    <button id="btn">Конвертувати</button>
+    <hr />
+    <div>
+      <label>
+        Сума в євро
+        <input placeholder="0" type="number" id="eur" />
+      </label>
+      <div>
+        <label>
+          Сума в доларах
+          <input placeholder="0" type="number" id="doll" />
+        </label>
+      </div>
+    </div>
+    <script>
+      "use strict";
+
+      function moneyExchange() {
+        const euroRate = 42.39;
+        const dollarRate = 39.73;
+        let hrnValue = parseInt(document.getElementById("hrn").value);
+        let hrnOnEuro = hrnValue / euroRate;
+        let hrnOnDollar = hrnValue / dollarRate;
+        document.getElementById("eur").value = hrnOnEuro.toFixed(1);
+        document.getElementById("doll").value = hrnOnDollar.toFixed(1);
+      }
+      let convertBtn = document.getElementById("btn");
+      convertBtn.onclick = moneyExchange;
+    </script>
+  </body>
+</html>
