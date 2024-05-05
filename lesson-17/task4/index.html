@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Склад. База товарів, які зберігаються на складі: назва товару, одиниця
+      виміру, кількість, фірма виробник (назва, реєстраційний номер).
+      Організувати реєстрацію/відвантаження товарів, фільтрація за назвою
+      товару, фільтрація за назвою фірми
+    </p>
+    <script>
+      "use strict";
+      class ManufacturerCompany {
+        constructor(title, registrationNumber) {
+          this.title = title;
+          this.registrationNumber = registrationNumber;
+        }
+        toString() {
+          return `(Виробник ${this.title},регістраційний номер:${this.registrationNumber}`;
+        }
+      }
+      class Product {
+        #productAmount;
+        get ProductAmount() {
+          return this.#productAmount;
+        }
+        set ProductAmount(val) {
+          if (val === 0) throw new Error("Товар закінчився");
+          else if (val < 0) throw new Error("Недопустима кількість товару");
+          this.#productAmount = val;
+        }
+        constructor(
+          prodName,
+          prodUnit,
+          prodAmount,
+          { title, registrationNumber }
+        ) {
+          this.productName = prodName;
+          this.productUnit = prodUnit;
+          this.ProductAmount = prodAmount;
+          this.productManufacterer = { title, registrationNumber };
+        }
+        toString() {
+          return `${this.productName}:<br>${this.ProductAmount} ${this.productUnit}<br>(Виробник:${this.productManufacterer.title},рег.номер:${this.productManufacterer.registrationNumber})<br>`;
+        }
+      }
+
+      const productList = [
+        new Product(
+          "Молоко",
+          "л.",
+          100,
+          new ManufacturerCompany("Яготинське", "911")
+        ),
+        new Product(
+          "Чай",
+          "шт.",
+          150,
+          new ManufacturerCompany("Ліптон", "169")
+        ),
+        new Product(
+          "Вода негазована",
+          "л.",
+          200,
+          new ManufacturerCompany("Моршинська", "222")
+        ),
+      ];
+      class Storage {
+        constructor(productList) {
+          this.productList = productList;
+        }
+        addProducts(
+          prodName,
+          prodUnit,
+          prodAmount,
+          { title, registrationNumber }
+        ) {
+          let product = new Product(
+            prodName,
+            prodUnit,
+            prodAmount,
+            new ManufacturerCompany(title, registrationNumber)
+          );
+          this.productList.push(product);
+        }
+        reduceProducts(prodName) {
+          this.productList = this.productList.filter(
+            (prod) => prod.productName !== prodName
+          );
+        }
+        getFilteredByProductName(prodName) {
+          this.productList = this.productList.filter(
+            (prod) => prod.productName === prodName
+          );
+        }
+        getFilteredByManufacturerName(manufactName) {
+          this.productList = this.productList.filter(
+            (prod) => prod.productManufacterer.title === manufactName
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

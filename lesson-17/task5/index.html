@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>
+      Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори
+      (піб, рік народження, короткий опис), назва книги, жанр, видавництво
+      (назва, реєстраційний номер, рік засування)). Реалізувати розділи
+      бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.),
+      походження книги і наявність на даний час. Організувати
+      додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за
+      видавництвом.
+    </p>
+    <script>
+      "use strict";
+      class Authors {
+        constructor({ authorName, authorBirthYear, authorDescription }) {
+          this.authorName = authorName;
+          this.authorBirthYear = authorBirthYear;
+          this.authorDescription = authorDescription;
+        }
+        toString() {
+          return `${this.authorName}, народився ${this.authorBirthYear},<br>${this.authorDescription}<br>`;
+        }
+      }
+      class PublishingHouse {
+        constructor({
+          publishName,
+          publishRegistrationNum,
+          publishFoundationYear,
+        }) {
+          this.publishName = publishName;
+          this.publishRegistrationNumber = publishRegistrationNum;
+          this.publishFoundationYear = publishFoundationYear;
+        }
+        toString() {
+          return `Видавництво ${this.publishName},рег.номер:${this.publishRegistrationNumber},засновано ${this.publishFoundationYear} р.<br>`;
+        }
+      }
+      class Book {
+        constructor(initData) {
+          this.authors = new Authors(initData);
+          this.title = initData.title;
+          this.genre = initData.genre;
+          this.publishingHouse = new PublishingHouse(initData);
+        }
+        toString() {
+          return `Книга ${this.title} написана в жанрі ${this.genre}<br>Автор ${this.authors.authorName}, народився ${this.authors.authorBirthYear} р.<br>${this.authors.authorDescription}<br>В Україні видана видавництвом ${this.publishingHouse.publishName},рег.номер:${this.publishingHouse.publishRegistrationNumber},засноване у ${this.publishingHouse.publishFoundationYear} р.<br>`;
+        }
+      }
+      const theLordOfTheRings = new Book({
+        authorName: "Джон Рональд Руел Толкін",
+        authorBirthYear: 1916,
+        authorDescription:
+          "Англійський письменник, поет, філолог, професор, класик світової літератури XX століття та один із фундаторів жанрового різновиду фантастики — високе фентезі.",
+        publishName: "КСД",
+        publishRegistrationNum: 28132,
+        publishFoundationYear: 2000,
+        title: "Володар Перснів:Братство Персня",
+        genre: "Фентезі",
+      });
+      const theWitcher = new Book({
+        authorName: "Анджей Сапковський",
+        authorBirthYear: 1948,
+        authorDescription: " польський письменник-фантаст і публіцист.",
+        publishName: "КСД",
+        publishRegistrationNum: 28132,
+        publishFoundationYear: 2000,
+        title: "Відьмак. Кров ельфів",
+        genre: "Фентезі",
+      });
+      const misterMersedes = new Book({
+        authorName: "Стівен Кінг",
+        authorBirthYear: 1947,
+        authorDescription:
+          " американський письменник, автор понад 200 творів, серед яких понад 50 бестселерів у стилях жахи (англ. horror), фентезі, трилер, містика. Його називають «Королем жаху».",
+        publishName: "Yakaboo",
+        publishRegistrationNum: 1488,
+        publishFoundationYear: 2004,
+        title: "Містер Мерседес",
+        genre: "Детектив",
+      });
+      const bookList = [theLordOfTheRings, theWitcher, misterMersedes];
+      class HomeLiberary {
+        constructor(bookList) {
+          this.bookList = bookList;
+          this.fantasyBooks = this.getSortedByGenre("фентезі");
+          this.detectiveBooks = this.getSortedByGenre("детектив");
+        }
+        getSortedByGenre(genre) {
+          return this.bookList.reduce(
+            (prevArray, book) =>
+              book.genre === genre ? [...prevArray, book] : [...prevArray],
+            []
+          );
+        }
+        addBook(initData) {
+          this.bookList.push(new Book(initData));
+        }
+        removeBook(bookTitle) {
+          this.bookList = this.bookList.filter(
+            (book) => book.title.toLowerCase() !== bookTitle.toLowerCase()
+          );
+        }
+        getBookByTitle(title) {
+          const book = this.bookList.find(
+            (book) => book.title.toLowerCase() === title.toLowerCase()
+          );
+          if (book) return book;
+          else throw new Error("Книги з такою назвою немає");
+        }
+        getBookByAuthor(authorName) {
+          const authorsBooks = [];
+          const book = this.bookList.filter(
+            (book) =>
+              book.authors.authorName.toLowerCase() === authorName.toLowerCase()
+          );
+          if (book) authorsBooks.push(book);
+          else throw new Error("Книг такого автора немає");
+          return authorsBooks;
+        }
+        getBookByPublishingHouse(publishHouseName) {
+          const publishHouseBooks = [];
+          const book = this.bookList.filter(
+            (book) =>
+              book.publishingHouse.publishName.toLowerCase() ===
+              publishHouseName.toLowerCase()
+          );
+          if (book) publishHouseBooks.push(book);
+          else throw new Error("Книг такого видавництва немає");
+          return publishHouseBooks;
+        }
+      }
+    </script>
+  </body>
+</html>
