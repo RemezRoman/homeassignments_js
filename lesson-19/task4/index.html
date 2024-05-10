@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається
+      клік на якійсь із клітинок, то до відповідної таблиці додається червона
+      рамка (спробуйте додати можливість відображення кількості кліків біля
+      назви таблиці з використанням відповідно доданого для цього атрибута).
+    </p>
+    <script>
+      "use strict";
+      const container = document.createElement("div");
+      container.className = "main-container";
+      document.body.append(container);
+      class Tables {
+        constructor(tableName, elementSelector, rowNumber, colNumber) {
+          this.el = this.renderTable(
+            tableName,
+            elementSelector,
+            rowNumber,
+            colNumber
+          );
+        }
+        renderTable(tableName, elementSelector, rowNumber, colNumber) {
+          const tableContainer = document.createElement("div");
+          tableContainer.style.width = "150px";
+          tableContainer.className = "table-container";
+          const tableTitle = document.createElement("span");
+          this.counter = 0;
+          tableTitle.innerText = `Table ${tableName} `;
+          tableTitle.setAttribute("count", this.counter);
+          //  tableCounter.innerText = `Clicked:`;
+          tableContainer.append(tableTitle);
+          const table = document.createElement("table");
+          table.style.border = "2px solid #000";
+          for (let i = 0; i < colNumber; i++) {
+            const row = this.getRow(rowNumber);
+            table.append(row);
+          }
+          tableContainer.addEventListener("click", (e) => {
+            const clickedEl = e.target;
+            const container = clickedEl.closest("table");
+            const title = container.previousElementSibling;
+            console.log(container);
+            if (clickedEl.tagName === "TD") {
+              this.counter++;
+              title.setAttribute("count", this.counter);
+              title.innerText = `Table ${tableName}     clicked: ${this.counter}`;
+              clickedEl.closest("table").style.border = "2px solid red";
+            }
+          });
+
+          tableContainer.append(table);
+          document.querySelector(elementSelector).append(tableContainer);
+        }
+        getRow(rowNumber) {
+          const row = document.createElement("tr");
+          for (let i = 0; i < rowNumber; i++) {
+            const rowEl = document.createElement("td");
+            rowEl.style.border = "2px solid #000";
+            rowEl.style.width = "40px";
+            rowEl.style.textAlign = "center";
+            const randomNumber = this.getRandomNumber();
+            rowEl.innerText = randomNumber;
+            row.append(rowEl);
+          }
+          return row;
+        }
+        getRandomNumber(min = 1, max = 100) {
+          return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+      }
+      let table1 = new Tables(" 1", ".main-container", 3, 3);
+      let table2 = new Tables(" 2", ".main-container", 3, 3);
+      let table3 = new Tables("3", ".main-container", 3, 3);
+    </script>
+  </body>
+</html>

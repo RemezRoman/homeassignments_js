@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>
+      Відображаємо картки товарів, які користувач може вибирати. Вибраний товар
+      має зелену рамку (при кліку робити toogle з класом вибраного елемента)
+    </p>
+    <script>
+      "use strict";
+      const container = document.createElement("div");
+      container.className = "main-container";
+      container.style.display = "flex";
+      container.style.gap = "30px";
+      document.body.append(container);
+      class ProductCard {
+        constructor(label, imgSrc, description, price, elementSelector) {
+          this.label = label;
+          this.imgSrc = imgSrc;
+          this.description = description;
+          this.price = price;
+          this.el = this.renderCard(elementSelector);
+        }
+        renderCard(elementSelector) {
+          const mainContainer = document.createElement("div");
+          mainContainer.onclick = this.onClick.bind(this);
+          mainContainer.style.width = "200px";
+          mainContainer.style.padding = "10px 20px 10px 20px";
+          mainContainer.className = "card-container";
+          mainContainer.className === "card-container";
+          mainContainer.style.border = "3px solid #f6f1f1";
+          mainContainer.append(this.getLabelBlock());
+          mainContainer.append(this.getImageBlock());
+          mainContainer.append(this.getDescriptionBlock());
+          mainContainer.append(this.getPriceBlock());
+
+          document.querySelector(elementSelector).append(mainContainer);
+          return mainContainer;
+        }
+        getLabelBlock() {
+          const labelBlock = document.createElement("div");
+          labelBlock.innerText = this.label;
+          labelBlock.style.width = "50%";
+          labelBlock.style.color = "white";
+          labelBlock.style.textTransform = "uppercase";
+          labelBlock.style.textAlign = "center";
+          labelBlock.style.alignContent = "center";
+          labelBlock.style.borderRadius = "20px";
+          if (labelBlock.innerText.toLowerCase() === "топ продаж")
+            labelBlock.style.backgroundColor = "orange";
+          else labelBlock.style.backgroundColor = "red";
+          return labelBlock;
+        }
+        getImageBlock() {
+          const imageBlock = document.createElement("div");
+          const image = document.createElement("img");
+          image.style.width = "100%";
+          image.style.marginTop = "10px";
+          image.setAttribute("src", this.imgSrc);
+          imageBlock.append(image);
+          return imageBlock;
+        }
+        getDescriptionBlock() {
+          const descriptionBlock = document.createElement("div");
+          descriptionBlock.innerText = this.description;
+          return descriptionBlock;
+        }
+        getPriceBlock() {
+          const priceBlock = document.createElement("div");
+          priceBlock.innerText = this.price;
+          priceBlock.style.fontSize = "30px";
+          priceBlock.style.textTransform = "uppercase";
+          priceBlock.style.color = "red";
+          return priceBlock;
+        }
+        onClick(e) {
+          const clickedEl = e.target;
+          const card = clickedEl.closest(".card-container");
+          //  card.style.border = "3px solid green";
+          card.classList.toggle("select");
+          if (card.className === "card-container select")
+            card.style.border = "3px solid green";
+          else card.style.border = "3px solid #f6f1f1";
+        }
+      }
+      let prod1 = new ProductCard(
+        "топ продаж",
+        "https://content.rozetka.com.ua/goods/images/big/410768842.jpg",
+        `Екран 15.6" IPS (1920x1080) Full HD 144 Гц, матовий`,
+        "35 999₴",
+        ".main-container"
+      );
+      let prod2 = new ProductCard(
+        "акція",
+        "https://content1.rozetka.com.ua/goods/images/big/362592316.jpg",
+        `Екран 15.6" IPS (1920x1080) Full HD, матовий / Intel Core i5-12450H`,
+        "29 999₴",
+        ".main-container"
+      );
+      let prod3 = new ProductCard(
+        "топ продаж",
+        "https://content.rozetka.com.ua/goods/images/big/334492324.jpg",
+        `Екран 16" IPS (1920x1200) WUXGA, матовий / Intel Core i5-12450H`,
+        "25 999₴",
+        ".main-container"
+      );
+      let prod4 = new ProductCard(
+        "топ продаж",
+        "https://content.rozetka.com.ua/goods/images/big/410768842.jpg",
+        `Екран 15.6" IPS (1920x1080) Full HD 144 Гц, матовий`,
+        "35 999₴",
+        ".main-container"
+      );
+    </script>
+  </body>
+</html>

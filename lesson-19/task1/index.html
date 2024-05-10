@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+    <style>
+      .rowEl {
+        width: 500px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #000;
+        border-radius: 10px 10px 10px 10px;
+      }
+      .rowEl:not(:last-child) {
+        margin: 0px 0px 20px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Дано 10 рядків тексту «Hello!» у окремих div. При кліку на якийсь із них
+      усі наступні повинні бути зафарбовані у червоний колір.
+    </p>
+    <script>
+      "use strict";
+      const mainContainer = document.createElement("div");
+      mainContainer.classList.add("main-container");
+      document.body.append(mainContainer);
+      function getTextsRows(rowCount) {
+        for (let i = 0; i < rowCount; i++) {
+          const row = document.createElement("div");
+          row.className = "rowEl";
+          row.innerText = "Hello!";
+          document.querySelector(".main-container").append(row);
+        }
+      }
+      getTextsRows(10);
+      function onRowClick(e) {
+        let clickedEl = e.target;
+        while (clickedEl.nextElementSibling !== null) {
+          clickedEl = clickedEl.nextElementSibling;
+          clickedEl.style.backgroundColor = "red";
+        }
+        console.log(clickedEl);
+      }
+      window.onload = function () {
+        document.querySelector(".main-container").onclick = onRowClick;
+      };
+    </script>
+  </body>
+</html>

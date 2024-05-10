@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Дано 5 випадковим чином згенерованих нумерованих списків з рандомними
+      числами (кількість елементів у списку випадкова від 1 до 10, елементи
+      випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з
+      парною кількістю елементів зафарбувати у зелений колір, інші у червоний.
+    </p>
+    <script>
+      "use strict";
+      const container = document.createElement("div");
+      container.className = "div-container";
+      container.style.display = "flex";
+      container.style.gap = "10px";
+      document.body.append(container);
+      function getRandomNumber(maxNum, minNum) {
+        return Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
+      }
+      function genereteLists(listsNumber) {
+        for (let list = 0; list < listsNumber; list++) {
+          const olEl = document.createElement("ol");
+          olEl.style.border = "2px solid #000";
+          olEl.style.borderRadius = "10px";
+          olEl.style.width = "40px";
+          olEl.style.justifyContent = "center";
+          olEl.style.alignItems = "center";
+          let listNum = getRandomNumber(10, 1);
+          for (let listEl = 0; listEl < listNum; listEl++) {
+            const liEl = document.createElement("li");
+            liEl.innerText = getRandomNumber(100, 1);
+            olEl.append(liEl);
+          }
+          document.querySelector(".div-container").append(olEl);
+        }
+      }
+      function onButtonClick() {
+        const lists = document.querySelectorAll("ol");
+        for (const list of lists) {
+          if (list.children.length % 2 === 0)
+            list.style.border = "2px solid green";
+          else list.style.border = "2px solid red";
+        }
+      }
+      const button = document.createElement("button");
+      button.style.width = "150px";
+      button.style.height = "50px";
+      button.style.borderRadius = "10px";
+      button.innerText = "Пофарбувати";
+      button.onclick = onButtonClick;
+      document.body.append(button);
+      genereteLists(5);
+    </script>
+  </body>
+</html>
