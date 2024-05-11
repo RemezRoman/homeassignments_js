@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>
+      Дано перелік товарів у кошику. При зміні кількості одиниць товару
+      збільшувати загальну вартість. Створити клас Product, що призначений для
+      маніпуляцій товаром та клас ProductManager що оперує з усіма товарами
+      (через подію передвати ідентифікатор товару та операцію, що зроблена)
+    </p>
+    <script>
+      "use strict";
+      const mainContainer = document.createElement("div");
+      mainContainer.className = "main-container";
+      document.body.append(mainContainer);
+
+      class Product {
+        constructor(productData) {
+          this.productData = productData;
+          this.el = this.render();
+        }
+        createImageSection() {
+          const image = document.createElement("img");
+          image.setAttribute("src", this.productData.imgSrc);
+          image.className = "product-image";
+          image.style.width = "50px";
+          return image;
+        }
+        createTitleSection() {
+          const title = document.createElement("span");
+          title.innerText = this.productData.title;
+          title.className = "product-title";
+          title.style.width = "200px";
+          return title;
+        }
+        createCounterSection() {
+          const counterContainer = document.createElement("div");
+          counterContainer.className = "product-counter";
+          counterContainer.style.display = "flex";
+          counterContainer.style.gap = "10px";
+
+          this.decreaseButton = document.createElement("button");
+          this.decreaseButton.innerText = "-";
+          this.decreaseButton.style.width = "20px";
+          this.decreaseButton.style.height = "20px";
+          this.decreaseButton.disabled = true;
+
+          this.decreaseButton.onclick = this.onDecreaseProduct.bind(this);
+          counterContainer.append(this.decreaseButton);
+
+          this.countSpan = document.createElement("span");
+          this.count = 0;
+          this.countSpan.innerText = this.count;
+          counterContainer.append(this.countSpan);
+
+          this.increaseButton = document.createElement("button");
+          this.increaseButton.innerText = "\u002B";
+          this.increaseButton.style.width = "20px";
+          this.increaseButton.style.height = "20px";
+          this.increaseButton.onclick = this.onIncreaseProduct.bind(this);
+          counterContainer.append(this.increaseButton);
+          return counterContainer;
+        }
+        sendEvent(eventType) {
+          const event = new CustomEvent(eventType, {
+            detail: { product: this.productData },
+            bubbles: true,
+          });
+          this.el.dispatchEvent(event);
+        }
+        get totalPrice() {
+          return this.count * this.productData.price;
+        }
+        updateCounter() {
+          this.countSpan.innerText = this.count;
+        }
+        isDisabledButton() {
+          console.log(this.count);
+          if (this.count < 1) {
+            this.decreaseButton.disabled = true;
+            this.increaseButton.disabled = false;
+          } else if (this.count === this.productData.count) {
+            this.increaseButton.disabled = true;
+            this.decreaseButton.disabled = false;
+          } else {
+            this.increaseButton.disabled = false;
+            this.decreaseButton.disabled = false;
+          }
+        }
+        onIncreaseProduct() {
+          this.count++;
+          this.isDisabledButton();
+          this.updateTotalPrice();
+          this.updateCounter();
+          this.sendEvent("increase");
+        }
+        onDecreaseProduct() {
+          this.count--;
+          this.isDisabledButton();
+          this.updateTotalPrice();
+          this.updateCounter();
+          this.sendEvent("decrease");
+        }
+        onDelete(e) {
+          this.sendEvent("delete");
+        }
+        updateTotalPrice() {
+          this.totalPriceSpan.innerText = `${this.totalPrice} грн.`;
+        }
+        createTotalProductSection() {
+          const totalContainer = document.createElement("div");
+          totalContainer.style.width = "150px";
+          totalContainer.className = "product-total";
+          totalContainer.innerText = "До оплати:";
+          totalContainer.style.fontSize = "20px";
+          totalContainer.style.fontWeight = "bold";
+
+          this.totalPriceSpan = document.createElement("span");
+          this.totalPriceSpan.className = "totalProduct-price";
+          this.totalPriceSpan.style.fontSize = "20px";
+          this.totalPriceSpan.style.fontWeight = "bold";
+          this.totalPriceSpan.style.color = "red";
+          this.totalPriceSpan.innerText = `${this.totalPrice} грн.`;
+          totalContainer.append(this.totalPriceSpan);
+          return totalContainer;
+        }
+        createRemoveButton() {
+          const removeButton = document.createElement("button");
+          removeButton.onclick = this.onDelete.bind(this);
+          removeButton.className = "product-remove";
+          removeButton.innerText = "\u02E3";
+          removeButton.style.width = "20px";
+          removeButton.style.height = "20px";
+          removeButton.style.color = "red";
+          removeButton.style.borderColor = "red";
+          removeButton.style.textAlign = "center";
+          return removeButton;
+        }
+        render() {
+          const productContainer = document.createElement("div");
+          productContainer.className = "product-container";
+          productContainer.setAttribute("productId", this.productData.id);
+          productContainer.style.display = "flex";
+          productContainer.style.height = "50px";
+          productContainer.style.width = "1000px";
+          productContainer.style.border = "2px solid #000";
+          productContainer.style.textAlign = "center";
+          productContainer.style.justifyContent = "space-between";
+          productContainer.style.alignItems = "center";
+          productContainer.style.padding = "0px 10px";
+
+          productContainer.append(this.createImageSection());
+          productContainer.append(this.createTitleSection());
+          productContainer.append(this.createCounterSection());
+          productContainer.append(this.createTotalProductSection());
+          productContainer.append(this.createRemoveButton());
+
+          return productContainer;
+        }
+      }
+
+      class ProductManager {
+        constructor(productsList, parentSelector) {
+          this.productsList = productsList;
+          this.el = this.render(parentSelector);
+        }
+        getTotalPrice() {
+          let productsPrice = document.querySelectorAll(".totalProduct-price");
+          let sum = 0;
+          for (const prod of productsPrice) {
+            sum += parseInt(prod.innerText);
+          }
+          return `${sum} грн.`;
+        }
+        totalPriceUpdate() {
+          this.totalSumCount.innerText = `${this.getTotalPrice()}`;
+        }
+        onIncreaseProduct() {
+          this.totalPriceUpdate();
+        }
+        onDecreaseProduct() {
+          this.totalPriceUpdate();
+        }
+        onDeleteProduct(event) {
+          const productId = event.detail.product.id;
+          //  this.productsList = this.productsList.filter(
+          //    (prod) => prod.id !== productId
+          //  );
+          document.querySelector(`[productId="${productId}"]`).remove();
+          this.totalPriceUpdate();
+        }
+        createProductsSection() {
+          const productsContainer = document.createElement("div");
+          productsContainer.style.marginBottom = "10px";
+          for (const productData of this.productsList) {
+            const product = new Product(productData);
+            product.el.style.marginBottom = "10px";
+            productsContainer.append(product.el);
+          }
+          return productsContainer;
+        }
+        createTotalSumSection() {
+          const totalSumSection = document.createElement("div");
+          totalSumSection.innerText = "Загалом до оплати:";
+          totalSumSection.style.fontSize = "30px";
+          totalSumSection.style.fontWeight = "bold";
+
+          this.totalSumCount = document.createElement("span");
+          this.totalSumCount.innerText = `${this.getTotalPrice()}`;
+          this.totalSumCount.style.color = "red";
+          this.totalSumCount.style.fontSize = "30px";
+          this.totalSumCount.style.fontWeight = "bold";
+          totalSumSection.append(this.totalSumCount);
+          return totalSumSection;
+        }
+        render(parentSelector) {
+          const appContainer = document.createElement("div");
+          appContainer.append(this.createProductsSection());
+          document.querySelector(parentSelector).append(appContainer);
+          document
+            .querySelector(parentSelector)
+            .append(this.createTotalSumSection());
+
+          appContainer.addEventListener(
+            "increase",
+            this.onIncreaseProduct.bind(this)
+          );
+          appContainer.addEventListener(
+            "decrease",
+            this.onDecreaseProduct.bind(this)
+          );
+          appContainer.addEventListener(
+            "delete",
+            this.onDeleteProduct.bind(this)
+          );
+          return appContainer;
+        }
+      }
+      const productsList = [
+        {
+          id: 1,
+          title: "LED-індикатор рівня сигналу/заряду KA2284",
+          imgSrc:
+            "https://content2.rozetka.com.ua/goods/images/big/303013209.jpg",
+          price: 2500,
+          count: 10,
+        },
+        {
+          id: 2,
+          title: "USB Led лампа підсвічування клавіатури",
+          imgSrc:
+            "https://content2.rozetka.com.ua/goods/images/big/387707182.jpg",
+          price: 1700,
+          count: 13,
+        },
+        {
+          id: 3,
+          title: "Цифровий Терморегулятор W1401",
+          imgSrc:
+            "https://content.rozetka.com.ua/goods/images/big/343621355.jpg",
+          price: 7900,
+          count: 6,
+        },
+      ];
+      let pr = new ProductManager(productsList, ".main-container");
+    </script>
+  </body>
+</html>
