@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>Створити клас Client<br />На основі цього класу створити клас GoldenClient</p>
+    <script>
+      'use strict'
+      class Client {
+        #moneyAmount
+        get MoneyAmount() {
+          return this.#moneyAmount
+        }
+        set MoneyAmount(val) {
+          if (val < this.minMoneyAmount) throw new Error('Недопустимий баланс')
+          this.#moneyAmount = val
+        }
+        constructor(id, fullName, moneyAmount, minMoneyAmount = 0) {
+          this.id = id
+          this.fullName = fullName
+          this.MoneyAmount = moneyAmount
+          this.minMoneyAmount = minMoneyAmount
+        }
+        addMoney(val) {
+          return (this.MoneyAmount += val)
+        }
+        withdrawMoney(val) {
+          if (this.MoneyAmount - val >= 0) this.MoneyAmount -= val
+          else throw new Error('Недостатньо коштів')
+        }
+        toString() {
+          return `<br>ПІБ Клієнта:${this.fullName}<br>Грошей на рахунку:${this.MoneyAmount} грн.`
+        }
+      }
+
+      class GoldenClient extends Client {
+        constructor(id, fullName, moneyAmount, creditLimit, percentForCreditLimitUsing) {
+          super(id, fullName, moneyAmount, -creditLimit)
+          this.MoneyAmount = moneyAmount
+          this.creditLimit = creditLimit
+          this.percentForCreditLimitUsing = percentForCreditLimitUsing
+          this.penalty = 0
+        }
+        isCreditMoney() {
+          if (this.MoneyAmount < 0)
+            this.penalty = (this.percentForCreditLimitUsing * -this.MoneyAmount) / 100
+          return this.penalty
+        }
+        withdrawMoney(val) {
+          if (this.MoneyAmount + this.creditLimit < val) throw new Error('Недопустимий баланс')
+          else this.MoneyAmount -= val
+          this.isCreditMoney()
+        }
+        toString() {
+          return `${super.toString()}<br>Пеня за користування кредитних коштів:${
+            this.penalty
+          } грн.<br>`
+        }
+      }
+      try {
+        let g1 = new GoldenClient(10, 'Авраменко Микола Сергійович', 4000, 5000, 10)
+        document.write(g1)
+        g1.withdrawMoney(50000)
+      } catch (er) {
+        alert(er.message)
+      }
+    </script>
+  </body>
+</html>

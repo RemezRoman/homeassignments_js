@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <script>
+      'use strict'
+      const mainContainer = document.createElement('div')
+      mainContainer.className = 'main-container'
+      document.body.append(mainContainer)
+      class Image {
+        constructor(x, y, imgSrc, interval, parentSelector, width, height) {
+          this.left = x
+          this.top = y
+          this.imgSrc = imgSrc
+          this.interval = interval
+          this.el = this.render(parentSelector, width, height)
+        }
+        render(parentSelector, width, height) {
+          this.container = document.createElement('div')
+          this.container.style.width = `${width}px`
+          this.container.style.height = `${height}px`
+          this.container.style.position = 'absolute'
+          this.container.style.border = '2px solid #000'
+          this.container.style.top = `${this.top}px`
+          this.container.style.left = `${this.left}px`
+
+          const image = document.createElement('img')
+          image.setAttribute('src', this.imgSrc)
+          image.style.objectFit = 'fill'
+          image.style.width = '100%'
+          image.style.height = '100%'
+          this.container.append(image)
+
+          if (parentSelector) document.querySelector(parentSelector).append(this.container)
+        }
+        updateImage(settingsFunc) {
+          setInterval(settingsFunc.bind(this), this.interval)
+        }
+      }
+      class House extends Image {
+        constructor(x, y, imgSrc, interval, parentSelector, width, height) {
+          super(x, y, imgSrc, interval, parentSelector, width, height)
+        }
+        scaleImage() {
+          const randomScale = Math.random() * (2 - 0.1) + 0.1
+          this.container.style.scale = `${randomScale}`
+        }
+        updateImage() {
+          super.updateImage(this.scaleImage)
+        }
+      }
+      class Dog extends Image {
+        constructor(x, y, imgSrc, interval, parentSelector, width, height) {
+          super(x, y, imgSrc, interval, parentSelector, width, height)
+        }
+        moveOnX() {
+          const randomMove = -300 + Math.floor(Math.random() * (2 * 300) + 1)
+          this.left += randomMove
+          if (this.left < 0 || this.left > window.innerWidth) this.left = 0
+          this.container.style.left = `${this.left}px`
+        }
+        updateImage() {
+          super.updateImage(this.moveOnX)
+        }
+      }
+      class Bird extends Image {
+        constructor(x, y, imgSrc, interval, parentSelector, width, height) {
+          super(x, y, imgSrc, interval, parentSelector, width, height)
+        }
+        getRandomPosition(max, min) {
+          return min + Math.floor(Math.random() * (2 * max) + 1)
+        }
+        move() {
+          const innerWidth = window.innerWidth
+          const innerHeight = window.innerHeight
+          console.log(innerWidth, innerHeight)
+          this.left += this.getRandomPosition(300, -300)
+          this.top += this.getRandomPosition(300, -300)
+          if (this.left < 0 || this.left > innerWidth) {
+            this.left = this.getRandomPosition(300, -300)
+            this.container.style.left = `${this.left}px`
+          } else this.container.style.left = `${this.left}px`
+          if (this.top < 0 || this.top > innerHeight) {
+            this.top = this.getRandomPosition(300, -300)
+            this.container.style.top = `${this.top}px`
+          } else this.container.style.top = `${this.top}px`
+        }
+        updateImage() {
+          super.updateImage(this.move)
+        }
+      }
+      let h1 = new House(
+        150,
+        200,
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgry1y7KI73_XMKEpxU16UCl8-rtc5iic7cMd2wSZT9mbPiXnnI4VqEn-yLDg4-C3REGY&usqp=CAU',
+        3000,
+        '.main-container',
+        300,
+        300
+      )
+      h1.updateImage()
+      let d1 = new Dog(
+        1250,
+        600,
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Snoop_Dogg_2019_by_Glenn_Francis.jpg/250px-Snoop_Dogg_2019_by_Glenn_Francis.jpg',
+        1500,
+        '.main-container',
+        300,
+        300
+      )
+      d1.updateImage()
+      let b1 = new Bird(
+        570,
+        300,
+        'https://play-lh.googleusercontent.com/Y9BUoMIWfhZDUFZ_MxQmnsgSyb3O8s8Sds65E_j46-vdDSJi_0Xqmoa-fHaQa7fGlw=s48-rw',
+        700,
+        '.main-container',
+        150,
+        150
+      )
+      b1.updateImage()
+    </script>
+  </body>
+</html>

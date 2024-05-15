@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули)
+      та оцінку (перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку
+      (якщо оцінка погана і це не останній місяць у семестрі) . Обробку усіх помилок зробити з
+      використанням відповідних класів.
+    </p>
+    <script>
+      'use strict'
+      const mainContainer = document.createElement('div')
+      mainContainer.className = 'main-container'
+      document.body.append(mainContainer)
+
+      const monthContainer = document.createElement('div')
+      const monthLabel = document.createElement('label')
+      monthLabel.innerText = 'Введіть місяць навчання: '
+      const monthInput = document.createElement('input')
+      monthInput.className = 'month-input'
+      monthInput.type = 'number'
+      monthLabel.append(monthInput)
+      monthContainer.append(monthLabel)
+      mainContainer.append(monthContainer)
+
+      const markContainer = document.createElement('div')
+      const markLabel = document.createElement('label')
+      markLabel.innerText = 'Введіть оцінку: '
+      const markInput = document.createElement('input')
+      markInput.className = 'mark-input'
+      markInput.type = 'number'
+      markLabel.append(markInput)
+      markContainer.append(markLabel)
+      mainContainer.append(markContainer)
+
+      const checkBtn = document.createElement('button')
+      checkBtn.innerText = 'Перевірити'
+      checkBtn.className = 'check-button'
+      mainContainer.append(checkBtn)
+      const hr = document.createElement('hr')
+      mainContainer.append(hr)
+
+      const resultDiv = document.createElement('div')
+      resultDiv.className = 'result'
+      mainContainer.append(resultDiv)
+
+      class IsNotNumberError extends Error {
+        constructor() {
+          super()
+          this.message = 'Введіть число'
+          this.name = 'IsNotNumberError'
+        }
+      }
+      class NumberNotInRangeError extends Error {
+        constructor() {
+          super()
+          this.message = 'Некоректне число'
+          this.name = 'NumberNotInRangeError'
+        }
+      }
+      class HolidayError extends Error {
+        constructor() {
+          super()
+          this.message = 'Це канікули'
+          this.name = 'HolidayError'
+        }
+      }
+      class GoodMarkError extends Error {
+        constructor() {
+          super()
+          this.message = 'Ця оцінка добра'
+          this.name = 'GoodMarkError'
+        }
+      }
+      class LastMonthHalfError extends Error {
+        constructor() {
+          super()
+          this.message = 'Це останній місяць семестра'
+          this.name = 'LastMonthHalfError'
+        }
+      }
+      function validate() {
+        try {
+          const month = parseInt(document.querySelector('.month-input').value)
+          const mark = parseInt(document.querySelector('.mark-input').value)
+          if (isNaN(month)) throw new IsNotNumberError()
+          if (month <= 1 || month >= 12) throw new NumberNotInRangeError()
+          if (month === 12 || month === 5) throw new LastMonthHalfError()
+          if (month === 6 || month === 7 || month === 8) throw new HolidayError()
+          if (isNaN(mark)) throw new IsNotNumberError()
+          if (mark <= 1 || mark >= 100) throw new NumberNotInRangeError()
+          if (mark >= 5) throw new GoodMarkError()
+          document.querySelector('.result').innerText = 'Цю оцінку можна виправити'
+        } catch (error) {
+          if (error instanceof IsNotNumberError)
+            document.querySelector('.result').innerText = `${error.message}`
+          else if (error instanceof NumberNotInRangeError)
+            document.querySelector('.result').innerText = `${error.message}`
+          else if (error instanceof LastMonthHalfError)
+            document.querySelector('.result').innerText = `${error.message}`
+          else if (error instanceof GoodMarkError)
+            document.querySelector('.result').innerText = `${error.message}`
+          else error instanceof HolidayError
+          document.querySelector('.result').innerText = `${error.message}`
+          return false
+        }
+      }
+      window.onload = function () {
+        document.querySelector('.check-button').onclick = validate
+      }
+    </script>
+  </body>
+</html>
