@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Створити функцію, яка дозволяє визначити, чи знаходиться вказана дата і час у межах поточного
+      тижня (від понеділка 0 год, 0хв, до неділі 23год.59хв)
+    </p>
+    <script>
+      'use strict'
+      const mainContainer = document.createElement('div')
+      mainContainer.innerText = 'Виберіть дату для перевірки'
+
+      const inputsContainer = document.createElement('div')
+
+      const dayInput = document.createElement('input')
+      dayInput.className = 'days'
+      dayInput.placeholder = 'День'
+      dayInput.type = 'number'
+
+      const monthInput = document.createElement('input')
+      monthInput.className = 'monthes'
+      monthInput.placeholder = 'Місяць'
+      monthInput.type = 'number'
+
+      const yearInput = document.createElement('input')
+      yearInput.className = 'years'
+      yearInput.placeholder = 'Рік'
+      yearInput.type = 'number'
+
+      const hourInput = document.createElement('input')
+      hourInput.className = 'hours'
+      hourInput.placeholder = 'Години'
+      hourInput.type = 'number'
+
+      const minutesInput = document.createElement('input')
+      minutesInput.className = 'minutes'
+      minutesInput.placeholder = 'Хвилини'
+      minutesInput.type = 'number'
+
+      inputsContainer.append(dayInput, monthInput, yearInput, hourInput, minutesInput)
+
+      const checkBtn = document.createElement('button')
+      checkBtn.innerText = 'Перевірити'
+
+      const answer = document.createElement('div')
+      answer.className = 'answer'
+
+      mainContainer.append(inputsContainer)
+      mainContainer.append(checkBtn)
+      mainContainer.append(answer)
+      document.body.append(mainContainer)
+
+      function checkDate() {
+        let now = new Date()
+        const year = parseInt(document.querySelector('.years').value)
+        const month = parseInt(document.querySelector('.monthes').value - 1)
+        const day = parseInt(document.querySelector('.days').value)
+        const hour = parseInt(document.querySelector('.hours').value)
+        const minutes = parseInt(document.querySelector('.minutes').value)
+        let findingDate = new Date(year, month, day, hour, minutes)
+
+        const weekDay = now.getDay()
+        let start
+        switch (weekDay) {
+          case 1:
+            start = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() - 1))
+            )
+            break
+          case 2:
+            start = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() - 2))
+            )
+            break
+          case 3:
+            start = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() - 3))
+            )
+            break
+          case 4:
+            start = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() - 4))
+            )
+            break
+          case 5:
+            start = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() - 5))
+            )
+            break
+          case 6:
+            start = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() - 6))
+            )
+            break
+          default:
+            start = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() - 7))
+            )
+            break
+        }
+        now = new Date()
+        let end
+        switch (weekDay) {
+          case 1:
+            end = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() + 6)),
+              23,
+              59
+            )
+            break
+          case 2:
+            end = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() + 5)),
+              23,
+              59
+            )
+            break
+          case 3:
+            end = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() + 4)),
+              23,
+              59
+            )
+            break
+          case 4:
+            end = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() + 3)),
+              23,
+              59
+            )
+            break
+          case 5:
+            end = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() + 2)),
+              23,
+              59
+            )
+            break
+          case 6:
+            end = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(now.setDate(now.getDate() + 1)),
+              23,
+              59
+            )
+            break
+          default:
+            end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59)
+            break
+        }
+        if (findingDate >= start && findingDate <= end)
+          document.querySelector('.answer').innerText = 'Вказана дата в межах поточного тижня'
+        else document.querySelector('.answer').innerText = 'Вказана дата не межах поточного тижня'
+        console.log(findingDate)
+      }
+      window.onload = function () {
+        document.querySelector('button').onclick = checkDate
+      }
+    </script>
+  </body>
+</html>

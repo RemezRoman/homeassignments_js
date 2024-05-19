@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>Визначити скільки залишилось до кінця робочого дня (до 17.00)</p>
+    <script>
+      'use strict'
+      const mainContainer = document.createElement('div')
+      const timeBlock = document.createElement('div')
+      timeBlock.className = 'time'
+
+      const checkBtn = document.createElement('button')
+      checkBtn.innerText = 'Перевірити'
+
+      const checkField = document.createElement('span')
+
+      mainContainer.append(timeBlock)
+      mainContainer.append(checkBtn)
+      mainContainer.append(checkField)
+      document.body.append(mainContainer)
+
+      window.onload = function () {
+        const now = new Date()
+        document.querySelector('.time').innerText = `Зараз ${now
+          .getHours()
+          .toString()
+          .padStart(2, 0)}:${now.getMinutes().toString().padStart(2, 0)}:${now
+          .getSeconds()
+          .toString()
+          .padStart(2, 0)}`
+        document.querySelector('button').onclick = function () {
+          const workFinishTime = new Date(
+            now.getUTCFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            17,
+            0
+          )
+          const hoursToWork = Math.floor((workFinishTime - now) / (1000 * 60 * 60))
+          const minutesToWork = Math.floor((workFinishTime - now) % (1000 * 60 * 60)) / (1000 * 60)
+          if (workFinishTime < now)
+            document.querySelector('span').innerText = 'Ви вже вільні, робочий день закінчився'
+          else
+            document.querySelector(
+              'span'
+            ).innerText = `Вам залишилось працювати ${hoursToWork}годин: ${minutesToWork}хвилин`
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+  <body>
+    <h1>Задача 1</h1>
+    <p>Виводити на екран скільки хвилин користувач вже на сайті</p>
+    <script>
+      'use strict'
+      const mainContainer = document.createElement('div')
+      mainContainer.style.margin = '0px auto'
+      const timeContainer = document.createElement('div')
+      timeContainer.style.width = '100px'
+      timeContainer.style.height = '50px'
+      timeContainer.style.border = '10px double rgb(43, 146, 236)'
+      timeContainer.style.margin = '0px auto'
+      timeContainer.style.display = 'flex'
+      timeContainer.style.textAlign = 'center'
+      timeContainer.style.alignItems = 'center'
+
+      const time = document.createElement('span')
+      time.className = 'time'
+      time.style.margin = '0px auto'
+      time.style.fontSize = '30px'
+      timeContainer.append(time)
+      mainContainer.append(timeContainer)
+      document.body.append(mainContainer)
+
+      window.onload = function () {
+        let now = Date.now()
+        let counter = setInterval(() => {
+          let startCounting = Date.now()
+          let countTimer = new Date(startCounting - now)
+          document.querySelector('.time').innerText = `${countTimer
+            .getMinutes()
+            .toString()
+            .padStart(2, 0)}:${countTimer.getSeconds().toString().padStart(2, 0)}`
+        }, 1000)
+      }
+    </script>
+  </body>
+</html>

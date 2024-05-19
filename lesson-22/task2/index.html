@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>Вводимо час початку процедури (процедура триває 30хв). Визначити, чи процедура ще триває.</p>
+    <script>
+      'use strict'
+      const mainContainer = document.createElement('div')
+      const titleBlock = document.createElement('div')
+      titleBlock.innerText = 'Введіть час початку процедури'
+
+      const hoursLabel = document.createElement('label')
+      hoursLabel.innerText = 'Години:'
+      const hoursInput = document.createElement('input')
+      hoursInput.className = 'hours'
+      hoursInput.type = 'number'
+      hoursLabel.append(hoursInput)
+
+      const minutesLabel = document.createElement('label')
+      minutesLabel.innerText = 'Хвилини:'
+      const minutesInput = document.createElement('input')
+      minutesInput.className = 'minutes'
+      minutesInput.type = 'number'
+      minutesLabel.append(minutesInput)
+
+      const hr = document.createElement('hr')
+
+      const checkBtn = document.createElement('button')
+      checkBtn.innerText = 'Перевірити'
+
+      const checkField = document.createElement('span')
+
+      mainContainer.append(titleBlock)
+      mainContainer.append(hoursLabel)
+      mainContainer.append(minutesLabel)
+      mainContainer.append(hr)
+      mainContainer.append(checkBtn)
+      mainContainer.append(checkField)
+      document.body.append(mainContainer)
+
+      function procedureTimeLeft() {
+        let now = new Date()
+        let hours = parseInt(document.querySelector('.hours').value)
+        let minutes = parseInt(document.querySelector('.minutes').value)
+        let procedureStart = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+          hours,
+          minutes
+        )
+        let procedureTime = 30
+        let timeDifference = Math.floor((now - procedureStart) / (1000 * 60))
+        if (timeDifference >= 0 && timeDifference <= procedureTime)
+          document.querySelector('span').innerText = 'Процедура ще триває'
+        else if (timeDifference > 0)
+          document.querySelector('span').innerText = 'Процедура вже закінчилась'
+        else document.querySelector('span').innerText = 'Процедура ще не почалась'
+
+        console.log(timeDifference)
+      }
+
+      document.querySelector('button').onclick = procedureTimeLeft
+    </script>
+  </body>
+</html>
