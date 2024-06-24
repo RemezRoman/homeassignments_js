@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 6</title>
+  </head>
+  <body>
+    <h1>Задача 6</h1>
+    <p>
+      Дано два списки прізвищ студентів, що відвідують гуртки з математики і історії. Підрахувати
+      скільки студентів з гуртка з історії також відвідують гурток з математики. Також підрахувати
+      скільки всього студентів відвідують хоча б один гурток.
+    </p>
+    <script>
+      'use strict'
+      const mathCircleStudents = [
+        'Сидоренко',
+        'Василенко',
+        'Довбик',
+        'Циганков',
+        'Бущан',
+        'Судаков',
+        'Мудрик',
+      ]
+      const historyCircleStudents = [
+        'Шапаренко',
+        'Усик',
+        'Довбик',
+        'Забарний',
+        'Миколенко',
+        'Яремчук',
+        'Мудрик',
+      ]
+      let studentsVisitsMathCircle = new Map()
+      for (const student of historyCircleStudents) {
+        if (mathCircleStudents.includes(student)) studentsVisitsMathCircle.set(student)
+      }
+      for (const [stud] of studentsVisitsMathCircle) {
+        document.write(`${stud} відвідує 2 гуртки<br>`)
+      }
+      let studentsVisitsAnyCircleCount = new Set()
+      for (const stud of mathCircleStudents) {
+        studentsVisitsAnyCircleCount.add(stud)
+      }
+      for (const stud of historyCircleStudents) {
+        studentsVisitsAnyCircleCount.add(stud)
+      }
+      document.write(
+        `<br>Загалом відвідує хоч один гурток ${studentsVisitsAnyCircleCount.size} учнів`
+      )
+    </script>
+  </body>
+</html>

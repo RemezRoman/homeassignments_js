@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 4</title>
+  </head>
+  <body>
+    <h1>Задача 4</h1>
+    <p>
+      Дано масив студентів (піб, курс, факультет). Підрахувати кількість різних факультетів, та
+      кількість студентів кожного з курсів.
+    </p>
+    <script>
+      'use strict'
+      class Student {
+        constructor(studentName, course, faculty) {
+          this.studentName = studentName
+          this.course = course
+          this.faculty = faculty
+        }
+      }
+      const studentsList = [
+        new Student('Roman', 4, 'fac1'),
+        new Student('Anton', 2, 'fac2'),
+        new Student('Petro', 1, 'fac3'),
+        new Student('Ivan', 4, 'fac3'),
+        new Student('Valeriy', 3, 'fac1'),
+        new Student('Inna', 1, 'fac3'),
+        new Student('Maria', 4, 'fac2'),
+      ]
+      let facultyNumber = new Set(studentsList.map((stud) => stud.faculty)).size
+      document.write(`Кількість різних факультетів:${facultyNumber}`)
+      let studentsOfEachCourse = new Map()
+      for (const stud of studentsList) {
+        let studCount = studentsOfEachCourse.get(stud.course) ?? 0
+        studentsOfEachCourse.set(stud.course, studCount + 1)
+      }
+      for (const [course, value] of studentsOfEachCourse) {
+        document.write(`<br>На ${course} курсі - ${value} студентів`)
+      }
+      console.log(studentsOfEachCourse)
+    </script>
+  </body>
+</html>

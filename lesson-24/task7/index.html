@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 7</title>
+  </head>
+  <body>
+    <h1>Задача 7</h1>
+    <p>
+      Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у localStorage).
+      Періодично випадковим чином вибирати якусь з справ і виводити користувачу (з використанням
+      confirm). Якщо користувач натискає на «Ок», то видаляти цю задачу.
+    </p>
+    <script>
+      'use strict'
+      const tasks = [
+        'Купити продукти',
+        'Зробити уроки',
+        'Поприбирати',
+        'Поїсти',
+        'Відпочити',
+        'Перетелефонувати',
+        'Зробити таски на завтра',
+      ]
+      class TaskManager {
+        constructor(tasks) {
+          this.tasks = tasks
+          this.setInterval()
+          this.setTask()
+        }
+        setInterval() {
+          this.interval = setInterval(this.getRandomTask.bind(this), 3000)
+        }
+        setTask() {
+          localStorage.setItem('task', JSON.stringify(this.tasks))
+        }
+        getRandomTask() {
+          let tasks = JSON.parse(localStorage.getItem('task'))
+
+          if (tasks.length > 0) {
+            let randomTask = Math.floor(Math.random() * tasks.length)
+            if (confirm(`Зробив задачу "${this.tasks[randomTask]}"?`)) {
+              this.tasks.splice(randomTask, 1)
+              this.setTask()
+            }
+          } else {
+            clearInterval(this.interval)
+            alert('Ура, всі задачі зроблені!')
+          }
+        }
+      }
+      let taskManager = new TaskManager(tasks)
+    </script>
+  </body>
+</html>

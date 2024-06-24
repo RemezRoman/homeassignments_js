@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 5</title>
+  </head>
+  <body>
+    <h1>Задача 5</h1>
+    <p>Дано масив показів температур. Підрахувати кількість входжень кожного із показів</p>
+    <p>Заокруглити вверх значення та підрахувати кількість різних показів.</p>
+    [12.4, 24.9, 10.6, 12.4, 24.9, 12.4, 10.6, 11.9]
+    <script>
+      'use strict'
+      let temperatures = [12.4, 24.9, 10.6, 12.4, 24.9, 12.4, 10.6, 11.9]
+      let temperaturesCount = new Map()
+      for (const temp of temperatures) {
+        let tempCount = temperaturesCount.get(temp) ?? 0
+        temperaturesCount.set(temp, tempCount + 1)
+      }
+      for (const [temp, value] of temperaturesCount) {
+        document.write(`<br>Температура ${temp} була - ${value} разів`)
+      }
+
+      let roundedTemperatures = temperatures.map((temp) => Math.ceil(temp))
+
+      document.write(`<br>Заокругленні вверх значення температур ${roundedTemperatures}`)
+      let differentTemperaturesCount = new Set(temperatures.map((temp) => temp)).size
+      document.write(`<br>Кількість різних показів температур:${differentTemperaturesCount}`)
+    </script>
+  </body>
+</html>

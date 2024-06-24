@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Дано масив книг (назва, рік видання, автор, ціна). Підрахувати загальну вартість книг для
+      кожного із авторів.
+    </p>
+    <script>
+      'use strict'
+      class Book {
+        constructor(title, year, author, price) {
+          this.title = title
+          this.year = year
+          this.author = author
+          this.price = price
+        }
+        [Symbol.toPrimitive] = function (hint) {
+          let result
+          switch (hint) {
+            case 'number':
+              result = this.price
+              break
+            case 'string':
+              result = `${this.author}-${this.price}`
+              break
+            default:
+              null
+              break
+          }
+          return result
+        }
+      }
+      const books = [
+        new Book('Володар перснів-1', 1999, 'Джон Толкін', 1500),
+        new Book('Гаррі Поттер-2', 2002, 'Джоан Роулінг', 3100),
+        new Book('Володар перснів-2', 2001, 'Джон Толкін', 2500),
+        new Book('Відьмак-5', 2009, 'Анджей Сапковскій', 8400),
+        new Book('Гаррі Поттер-1', 1999, 'Джоан Роулінг', 1100),
+        new Book('Володар перснів-3', 2004, 'Джон Толкін', 4500),
+        new Book('Гаррі Поттер-3', 2005, 'Джоан Роулінг', 1900),
+        new Book('Відьмак-1', 2005, 'Анджей Сапковскій', 4400),
+      ]
+      let map = new Map()
+      for (const book of books) {
+        let totalPrice = map.get(book.author) ?? 0
+        map.set(book.author, totalPrice + book.price)
+      }
+      map.forEach((totalPrice, author) => {
+        document.write(`${author}-${totalPrice}<br>`)
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Дано інформацію про відвідувачів деякого сайту (для кожного відвідувача зберігається логін).
+      Підрахувати для кожного клієнта кількість відвідувань.
+    </p>
+    <script>
+      'use strict'
+      const usersData = [
+        'login1',
+        'login2',
+        'login3',
+        'login2',
+        'login1',
+        'login4',
+        'login5',
+        'login3',
+        'login2',
+      ]
+      let map = new Map()
+      for (const user of usersData) {
+        let count = map.get(user) ?? 0
+        map.set(user, count + 1)
+      }
+      map.forEach((count, user) => document.write(`${user}-${count}<br>`))
+    </script>
+  </body>
+</html>
