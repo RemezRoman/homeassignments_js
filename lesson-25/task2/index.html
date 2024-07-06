@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+  <body>
+    <h1>Задача 2</h1>
+    <p>
+      Дано Shop -- клас, що містить список товарів (масив об’єктів класу Product (назва, ціна,
+      кількість одиниць). Додати можливість ітератора до класу Shop, щоб при ітеруванні для кожного
+      елемента виводився рядок «товар-загальна вартість»
+    </p>
+    <script>
+      'use strict'
+      class Product {
+        constructor(title, price, count) {
+          this.title = title
+          this.price = price
+          this.count = count
+        }
+        get TotalPrice() {
+          return this.price * this.count
+        }
+        [Symbol.toPrimitive](hint) {
+          let result
+          switch (hint) {
+            case 'string':
+              result = `<br>${this.title} - ${this.TotalPrice}`
+              break
+            default:
+              result = this.count
+              break
+          }
+          return result
+        }
+      }
+
+      class Shop {
+        constructor(productList) {
+          this.productList = productList
+        }
+        [Symbol.iterator]() {
+          this.currentIndex = 0
+          return this
+        }
+        next() {
+          if (this.currentIndex < this.productList.length) {
+            return {
+              done: false,
+              value: String(this.productList[this.currentIndex++]),
+            }
+          } else return { done: true }
+        }
+      }
+      const productList = [
+        new Product('Milk', 70, 25),
+        new Product('Coffee', 170, 15),
+        new Product('Water', 15, 55),
+        new Product('Beer', 50, 125),
+      ]
+      const shop = new Shop(productList)
+      for (const product of shop) {
+        document.write(product)
+      }
+    </script>
+  </body>
+</html>
